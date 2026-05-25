@@ -325,8 +325,6 @@
   .skill-card:nth-child(2) .skill-fill { background: var(--coral); }
   .skill-card:nth-child(3) .skill-fill { background: var(--yellow); }
   .skill-card:nth-child(4) .skill-fill { background: var(--green); }
-  .skill-card:nth-child(5) .skill-fill { background: var(--purple); }
-  .skill-card:nth-child(6) .skill-fill { background: var(--sky-dark); }
 
   /* ─── PROJECTS ─── */
   .projects { background: var(--yellow); border-top: var(--outline-w) solid var(--outline); border-bottom: var(--outline-w) solid var(--outline); }
@@ -396,97 +394,46 @@
   }
   .project-link:hover { background: var(--coral); color: var(--white); transform: rotate(-2deg); }
 
-  /* ─── CONTACT ─── */
-  .contact { background: var(--cream); }
+  /* ─── CONTACT (DISCORD ONLY) ─── */
+  .contact { background: var(--cream); text-align: center; }
 
-  .contact-inner {
-    max-width: 600px;
-    margin: 0 auto 2rem;
+  .discord-box {
+    max-width: 500px;
+    margin: 0 auto;
     background: var(--white);
     border: 3px solid var(--outline);
-    border-radius: 28px;
+    border-radius: 24px;
     padding: 2.5rem;
     box-shadow: 8px 8px 0 var(--outline);
   }
 
-  .contact-inner h3 {
+  .discord-box h3 {
     font-family: 'Fredoka One', cursive;
-    font-size: 1.8rem;
-    text-align: center;
-    margin-bottom: 1.5rem;
-    color: var(--coral);
+    font-size: 1.6rem;
+    margin-bottom: 1rem;
   }
 
-  .form-group { margin-bottom: 1.2rem; }
-
-  .form-group label {
-    display: block;
-    font-weight: 800;
-    font-size: 0.9rem;
-    margin-bottom: 0.4rem;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-  }
-
-  .form-group input,
-  .form-group textarea {
-    width: 100%;
-    padding: 0.7rem 1rem;
-    border: 3px solid var(--outline);
-    border-radius: 12px;
-    font-family: 'Nunito', sans-serif;
-    font-size: 1rem;
+  .discord-box p {
     font-weight: 600;
-    background: var(--cream);
-    transition: box-shadow 0.15s, transform 0.15s;
-    outline: none;
-  }
-  .form-group input:focus,
-  .form-group textarea:focus {
-    box-shadow: 4px 4px 0 var(--sky);
-    transform: translateY(-2px);
+    color: #555;
+    margin-bottom: 1.5rem;
   }
 
-  .form-group textarea { resize: vertical; min-height: 110px; }
-
-  .btn-submit {
+  .btn-discord {
     font-family: 'Fredoka One', cursive;
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     padding: 0.8rem 2.5rem;
     border: 3px solid var(--outline);
     border-radius: 50px;
-    background: var(--coral);
+    background: #5865F2; /* Discord Blurple */
     color: var(--white);
-    cursor: pointer;
-    width: 100%;
+    text-decoration: none;
+    display: inline-block;
     box-shadow: 5px 5px 0 var(--outline);
     transition: transform 0.15s, box-shadow 0.15s;
-    margin-top: 0.5rem;
   }
-  .btn-submit:hover { transform: translate(-2px, -2px); box-shadow: 7px 7px 0 var(--outline); }
-  .btn-submit:active { transform: translate(2px, 2px); box-shadow: 3px 3px 0 var(--outline); }
-
-  .social-row {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    margin-top: 2rem;
-    flex-wrap: wrap;
-  }
-
-  .social-btn {
-    font-family: 'Fredoka One', cursive;
-    font-size: 1rem;
-    text-decoration: none;
-    color: var(--outline);
-    background: var(--white);
-    border: 2.5px solid var(--outline);
-    border-radius: 50px;
-    padding: 0.5rem 1.3rem;
-    box-shadow: 3px 3px 0 var(--outline);
-    transition: transform 0.15s, background 0.15s;
-  }
-  .social-btn:hover { transform: rotate(-2deg) translateY(-3px); background: var(--sky); }
+  .btn-discord:hover { transform: translate(-3px, -3px); box-shadow: 8px 8px 0 var(--outline); background: #4752C4; }
+  .btn-discord:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0 var(--outline); }
 
   /* ─── FOOTER ─── */
   footer {
@@ -499,8 +446,6 @@
     position: relative;
     z-index: 1;
   }
-
-  footer span { color: var(--coral); }
 
   /* ─── FLOATING STARS ─── */
   .star {
@@ -561,10 +506,10 @@
   <div class="hero-blob blob4"></div>
 
   <div class="hero-content">
-    <div class="hero-avatar">🎨</div>
+    <div class="hero-avatar">💻</div>
     <h1>Hi, I'm <span>Qelp!</span></h1>
-    <p class="hero-sub">✨ Creative Developer & Designer ✨</p>
-    <p class="hero-desc">I build fun, expressive, and out-of-the-box digital experiences that make people smile. Let's make the web a little more colorful!</p>
+    <p class="hero-sub">✨ Roblox Scripter & Systems Designer ✨</p>
+    <p class="hero-desc">I craft clean, optimized, and secure Luau code to bring immersive gameplay mechanics to life on the Roblox platform.</p>
     <a href="#projects" class="btn btn-primary">See My Work 🚀</a>
     <a href="#contact" class="btn btn-secondary">Say Hello 👋</a>
   </div>
@@ -575,7 +520,7 @@
   <div class="about-inner">
     <div class="about-card reveal">
       <h3>Who am I? 🤔</h3>
-      <p>A passionate full-stack developer who loves turning wild ideas into real products. When I'm not coding, you'll find me sketching UI concepts, playing indie games, or watching too many cartoons for "research purposes."</p>
+      <p>A passionate Roblox developer specialized in gameplay programming, backend database systems, and modular framework development. I focus on writing robust, expandable code that keeps game servers running smooth and player data perfectly safe.</p>
       <br>
     </div>
     <div class="stats-grid reveal">
@@ -592,44 +537,32 @@
   <div class="section-title-wrapper">
     <div class="section-title">My Skills 🛠️</div>
   </div>
-  <p class="section-sub">The tools & toys in my creative toolbox</p>
+  <p class="section-sub">Technical engineering & architecture inside Roblox</p>
 
   <div class="skills-grid">
     <div class="skill-card reveal">
-      <span class="skill-icon">⚛️</span>
-      <h4>React / Next.js</h4>
-      <p style="font-size:0.85rem;font-weight:600;color:#666">Frontend magic</p>
-      <div class="skill-bar"><div class="skill-fill" style="width:92%"></div></div>
-    </div>
-    <div class="skill-card reveal">
-      <span class="skill-icon">🎨</span>
-      <h4>UI / UX Design</h4>
-      <p style="font-size:0.85rem;font-weight:600;color:#666">Making things pretty</p>
-      <div class="skill-bar"><div class="skill-fill" style="width:88%"></div></div>
-    </div>
-    <div class="skill-card reveal">
-      <span class="skill-icon">🟡</span>
-      <h4>JavaScript / TS</h4>
-      <p style="font-size:0.85rem;font-weight:600;color:#666">Logic & power</p>
+      <span class="skill-icon">📦</span>
+      <h4>Modular Structure</h4>
+      <p style="font-size:0.85rem;font-weight:600;color:#666">Clean & OOP codebases</p>
       <div class="skill-bar"><div class="skill-fill" style="width:95%"></div></div>
     </div>
     <div class="skill-card reveal">
-      <span class="skill-icon">🌿</span>
-      <h4>Node.js / APIs</h4>
-      <p style="font-size:0.85rem;font-weight:600;color:#666">Backend goodness</p>
-      <div class="skill-bar"><div class="skill-fill" style="width:80%"></div></div>
+      <span class="skill-icon">🌐</span>
+      <h4>Server-Client Comm.</h4>
+      <p style="font-size:0.85rem;font-weight:600;color:#666">Secure Remotes & Bindables</p>
+      <div class="skill-bar"><div class="skill-fill" style="width:92%"></div></div>
     </div>
     <div class="skill-card reveal">
-      <span class="skill-icon">🔮</span>
-      <h4>Figma / Motion</h4>
-      <p style="font-size:0.85rem;font-weight:600;color:#666">Smooth animations</p>
-      <div class="skill-bar"><div class="skill-fill" style="width:85%"></div></div>
+      <span class="skill-icon">⚡</span>
+      <h4>Well Optimized Scripts</h4>
+      <p style="font-size:0.85rem;font-weight:600;color:#666">High performance, low lag</p>
+      <div class="skill-bar"><div class="skill-fill" style="width:90%"></div></div>
     </div>
     <div class="skill-card reveal">
-      <span class="skill-icon">☁️</span>
-      <h4>Cloud / DevOps</h4>
-      <p style="font-size:0.85rem;font-weight:600;color:#666">Deploy with confidence</p>
-      <div class="skill-bar"><div class="skill-fill" style="width:72%"></div></div>
+      <span class="skill-icon">💾</span>
+      <h4>Data Saving (ProfileStore)</h4>
+      <p style="font-size:0.85rem;font-weight:600;color:#666">Session locking & data safety</p>
+      <div class="skill-bar"><div class="skill-fill" style="width:88%"></div></div>
     </div>
   </div>
 </section>
@@ -639,75 +572,59 @@
   <div class="section-title-wrapper">
     <div class="section-title">My Work 🌟</div>
   </div>
-  <p class="section-sub">Some things I've built and loved</p>
+  <p class="section-sub">Showcases and scripts in action</p>
 
   <div class="projects-grid">
+    <!-- WORK 1 -->
     <div class="project-card reveal">
-      <div class="project-thumb" style="background:#E8F9FF">🌊</div>
+      <div class="project-thumb" style="background:#E8F9FF">🛠️</div>
       <div class="project-body">
-        <span class="project-tag">Web App</span>
-        <h3>AquaTrack</h3>
-        <p>A delightful hydration reminder app with animated water creatures that cheer you on. Built with React + Framer Motion.</p>
-        <a href="#" class="project-link">View Project →</a>
+        <span class="project-tag" style="background:var(--purple);color:white">Roblox System</span>
+        <h3>Advanced Placement System</h3>
+        <p>Clean Modular Advanced Placement System.</p>
+        <a href="https://www.youtube.com/watch?v=DQknjgCaorI" target="_blank" class="project-link">Watch Showcase →</a>
       </div>
     </div>
+    <!-- WORK 2 -->
     <div class="project-card reveal">
-      <div class="project-thumb" style="background:#FFF3E0">🎮</div>
+      <div class="project-thumb" style="background:#FFF3E0">🤖</div>
       <div class="project-body">
-        <span class="project-tag" style="background:var(--coral);color:white">Game</span>
-        <h3>Pixel Quest</h3>
-        <p>A browser-based RPG with procedurally generated dungeons and retro pixel art. Vanilla JS + HTML Canvas sorcery.</p>
-        <a href="#" class="project-link">View Project →</a>
+        <span class="project-tag" style="background:var(--coral);color:white">AI / Navigation</span>
+        <h3>Basic Use Of PathFindingService</h3>
+        <p>Basic Use Of PathFindingService</p>
+        <a href="https://www.youtube.com/watch?v=-E85ac_U5mo" target="_blank" class="project-link">Watch Showcase →</a>
       </div>
     </div>
+    <!-- WORK 3 -->
     <div class="project-card reveal">
-      <div class="project-thumb" style="background:#F0FFF4">🤖</div>
+      <div class="project-thumb" style="background:#F0FFF4">💥</div>
       <div class="project-body">
-        <span class="project-tag" style="background:var(--green)">AI Tool</span>
-        <h3>MoodBoard AI</h3>
-        <p>An AI-powered design inspiration tool that generates mood boards from text descriptions. Next.js + Claude API.</p>
-        <a href="#" class="project-link">View Project →</a>
+        <span class="project-tag" style="background:var(--green)">Combat System</span>
+        <h3>Highly Scalable Gun System</h3>
+        <p>Highly Scalable Gun System.</p>
+        <a href="https://www.youtube.com/watch?v=WvB0-f8_4-o" target="_blank" class="project-link">Watch Showcase →</a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- CONTACT -->
+<!-- CONTACT (DISCORD ONLY) -->
 <section class="contact" id="contact">
   <div class="section-title-wrapper">
     <div class="section-title">Contact Me! 💬</div>
   </div>
-  <p class="section-sub">Let's build something awesome together</p>
+  <p class="section-sub">Let's talk business or collaborate on a project</p>
 
-  <div class="contact-inner reveal">
-    <h3>Drop a Message! 🚀</h3>
-    <form onsubmit="event.preventDefault();">
-      <div class="form-group">
-        <label for="name">Your Name</label>
-        <input type="text" id="name" placeholder="Mickey Mouse" required>
-      </div>
-      <div class="form-group">
-        <label for="email">Your Email</label>
-        <input type="email" id="email" placeholder="mickey@toon.com" required>
-      </div>
-      <div class="form-group">
-        <label for="message">Message</label>
-        <textarea id="message" placeholder="Hey Qelp! I love your style..." required></textarea>
-      </div>
-      <button type="submit" class="btn-submit">Send it! 🎉</button>
-    </form>
-
-    <div class="social-row">
-      <a href="#" class="social-btn">🐦 Twitter</a>
-      <a href="#" class="social-btn">🐙 GitHub</a>
-      <a href="#" class="social-btn">💼 LinkedIn</a>
-    </div>
+  <div class="discord-box reveal">
+    <h3>Have a Project in Mind? 🚀</h3>
+    <p>Reach out directly via Discord! Click the button below to open my profile.</p>
+    <a href="https://discord.com/users/1039914745240752189" target="_blank" class="btn-discord">👾 Connect on Discord</a>
   </div>
 </section>
 
 <!-- FOOTER -->
 <footer>
-  Made with <span>❤️</span> by Qelp © 2026 | Stay Colorful ✨
+  Qelp © 2026 | Stay Colorful ✨
 </footer>
 
 <script>
@@ -739,20 +656,6 @@
     });
   }, { threshold: 0.5 });
   skillCards.forEach(c => skillObs.observe(c));
-
-  // Form artık sayfada mevcut olduğu için hatasız çalışacaktır
-  const submitBtn = document.querySelector('.btn-submit');
-  if(submitBtn) {
-    submitBtn.addEventListener('click', function(e) {
-      const form = this.closest('form');
-      if(form && form.checkValidity()) {
-        e.preventDefault();
-        this.textContent = '✅ Sent! Talk soon!';
-        this.style.background = 'var(--green)';
-        setTimeout(() => { this.textContent = 'Send it! 🎉'; this.style.background = 'var(--coral)'; }, 3000);
-      }
-    });
-  }
 </script>
 </body>
 </html>
