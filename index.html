@@ -276,11 +276,11 @@
   .skills { background: var(--cream); }
 
   .skills-grid {
-    max-width: 900px;
+    max-width: 1000px;
     margin: 0 auto;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1.2rem;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
   }
 
   .skill-card {
@@ -321,10 +321,13 @@
     transition: width 1.2s cubic-bezier(.4,0,.2,1);
   }
 
+  /* Renk doldurma eşleşmeleri */
   .skill-card:nth-child(1) .skill-fill { background: var(--sky); }
   .skill-card:nth-child(2) .skill-fill { background: var(--coral); }
   .skill-card:nth-child(3) .skill-fill { background: var(--yellow); }
   .skill-card:nth-child(4) .skill-fill { background: var(--green); }
+  .skill-card:nth-child(5) .skill-fill { background: var(--purple); }
+  .skill-card:nth-child(6) .skill-fill { background: var(--coral); }
 
   /* ─── PROJECTS ─── */
   .projects { background: var(--yellow); border-top: var(--outline-w) solid var(--outline); border-bottom: var(--outline-w) solid var(--outline); }
@@ -481,13 +484,11 @@
 </head>
 <body>
 
-<!-- Floating deco -->
 <div class="star" style="color:#5BC8E8">★</div>
 <div class="star" style="color:#FF7875">★</div>
 <div class="star" style="color:#FFD166">✦</div>
 <div class="star" style="color:#06D6A0">★</div>
 
-<!-- NAV -->
 <nav>
   <div class="nav-logo">✦ Qelp Portfolio</div>
   <div class="nav-links">
@@ -498,7 +499,6 @@
   </div>
 </nav>
 
-<!-- HERO -->
 <section class="hero" id="home">
   <div class="hero-blob blob1"></div>
   <div class="hero-blob blob2"></div>
@@ -515,7 +515,6 @@
   </div>
 </section>
 
-<!-- ABOUT -->
 <section class="about" id="about">
   <div class="about-inner">
     <div class="about-card reveal">
@@ -536,7 +535,6 @@
   </div>
 </section>
 
-<!-- SKILLS -->
 <section class="skills" id="skills">
   <div class="section-title-wrapper">
     <div class="section-title">My Skills 🛠️</div>
@@ -567,10 +565,21 @@
       <p style="font-size:0.85rem;font-weight:600;color:#666">Session locking & data safety</p>
       <div class="skill-bar"><div class="skill-fill" style="width:88%"></div></div>
     </div>
+    <div class="skill-card reveal">
+      <span class="skill-icon">🎨</span>
+      <h4>UI Scripting & Tweens</h4>
+      <p style="font-size:0.85rem;font-weight:600;color:#666">Smooth & responsive layouts</p>
+      <div class="skill-bar"><div class="skill-fill" style="width:85%"></div></div>
+    </div>
+    <div class="skill-card reveal">
+      <span class="skill-icon">🪙</span>
+      <h4>Monetization Systems</h4>
+      <p style="font-size:0.85rem;font-weight:600;color:#666">Gamepasses, products & shops</p>
+      <div class="skill-bar"><div class="skill-fill" style="width:91%"></div></div>
+    </div>
   </div>
 </section>
 
-<!-- PROJECTS -->
 <section class="projects" id="projects">
   <div class="section-title-wrapper">
     <div class="section-title">My Work 🌟</div>
@@ -578,7 +587,6 @@
   <p class="section-sub">Showcases and scripts in action</p>
 
   <div class="projects-grid">
-    <!-- WORK 1 -->
     <div class="project-card reveal">
       <div class="project-thumb" style="background:#E8F9FF">🛠️</div>
       <div class="project-body">
@@ -588,7 +596,6 @@
         <a href="https://www.youtube.com/watch?v=DQknjgCaorI" target="_blank" class="project-link">Watch Showcase →</a>
       </div>
     </div>
-    <!-- WORK 2 -->
     <div class="project-card reveal">
       <div class="project-thumb" style="background:#FFF3E0">🤖</div>
       <div class="project-body">
@@ -598,7 +605,6 @@
         <a href="https://www.youtube.com/watch?v=-E85ac_U5mo" target="_blank" class="project-link">Watch Showcase →</a>
       </div>
     </div>
-    <!-- WORK 3 -->
     <div class="project-card reveal">
       <div class="project-thumb" style="background:#F0FFF4">💥</div>
       <div class="project-body">
@@ -611,7 +617,6 @@
   </div>
 </section>
 
-<!-- CONTACT (DISCORD ONLY) -->
 <section class="contact" id="contact">
   <div class="section-title-wrapper">
     <div class="section-title">Contact Me! 💬</div>
@@ -625,7 +630,6 @@
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer>
   Qelp © 2026 | Stay Colorful ✨
 </footer>
