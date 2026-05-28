@@ -128,6 +128,14 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    font-size: 4rem;
+  }
+
+  .hero-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
   }
 
   @keyframes avatarBounce {
@@ -348,36 +356,22 @@
   }
   .project-card:hover { transform: translate(-4px, -4px); box-shadow: 10px 10px 0 var(--outline); }
 
-  .project-thumb {
-    height: 200px;
-    border-bottom: 3px solid var(--outline);
-  }
-
   .project-body { padding: 1.2rem 1.5rem 1.5rem; }
-
-  .project-tag {
-    font-size: 0.72rem;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    background: var(--sky);
-    color: var(--outline);
-    border: 2px solid var(--outline);
-    border-radius: 50px;
-    padding: 0.2rem 0.7rem;
-    display: inline-block;
-    margin-bottom: 0.6rem;
-  }
 
   .project-body h3 {
     font-family: 'Fredoka One', cursive;
     font-size: 1.3rem;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.8rem;
   }
 
-  .project-body p { font-size: 0.93rem; font-weight: 600; color: #444; line-height: 1.6; margin-bottom: 1rem; }
+  .project-video {
+    width: 100%;
+    aspect-ratio: 16/9;
+    border: none;
+    display: block;
+  }
 
-  /* ─── CONTACT ─── */
+  /* ─── CONTACT (DISCORD ONLY) ─── */
   .contact { background: var(--cream); text-align: center; }
 
   .discord-box {
@@ -416,21 +410,58 @@
     transition: transform 0.15s, box-shadow 0.15s;
   }
   .btn-discord:hover { transform: translate(-3px, -3px); box-shadow: 8px 8px 0 var(--outline); background: #4752C4; }
+  .btn-discord:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0 var(--outline); }
 
-  footer { background: var(--outline); color: var(--white); text-align: center; padding: 1.5rem; font-family: 'Fredoka One', cursive; }
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--outline);
+    color: var(--white);
+    text-align: center;
+    padding: 1.5rem;
+    font-family: 'Fredoka One', cursive;
+    font-size: 1rem;
+    position: relative;
+    z-index: 1;
+  }
 
-  .star { position: fixed; pointer-events: none; z-index: 0; animation: starSpin 8s linear infinite; font-size: 1.5rem; opacity: 0.35; }
+  /* ─── FLOATING STARS ─── */
+  .star {
+    position: fixed;
+    pointer-events: none;
+    z-index: 0;
+    animation: starSpin 8s linear infinite;
+    font-size: 1.5rem;
+    opacity: 0.35;
+  }
   .star:nth-child(1) { top: 12%; left: 5%; animation-duration: 7s; }
   .star:nth-child(2) { top: 70%; left: 92%; animation-duration: 9s; animation-direction: reverse; }
   .star:nth-child(3) { top: 45%; left: 3%; animation-duration: 11s; }
   .star:nth-child(4) { top: 85%; left: 50%; animation-duration: 6s; animation-direction: reverse; }
 
-  @keyframes starSpin { from { transform: rotate(0deg) scale(1); } 50% { transform: rotate(180deg) scale(1.3); } to { transform: rotate(360deg) scale(1); } }
+  @keyframes starSpin {
+    from { transform: rotate(0deg) scale(1); }
+    50% { transform: rotate(180deg) scale(1.3); }
+    to { transform: rotate(360deg) scale(1); }
+  }
+
+  /* ─── SCROLL REVEAL ─── */
   .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.6s, transform 0.6s; }
   .reveal.visible { opacity: 1; transform: none; }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 700px) {
+    nav { padding: 0.8rem 1rem; }
+    .nav-links { gap: 0.5rem; }
+    .about-inner { grid-template-columns: 1fr; }
+  }
 </style>
 </head>
 <body>
+
+<div class="star" style="color:#5BC8E8">★</div>
+<div class="star" style="color:#FF7875">★</div>
+<div class="star" style="color:#FFD166">✦</div>
+<div class="star" style="color:#06D6A0">★</div>
 
 <nav>
   <div class="nav-logo">✦ Qelp Portfolio</div>
@@ -443,9 +474,14 @@
 </nav>
 
 <section class="hero" id="home">
+  <div class="hero-blob blob1"></div>
+  <div class="hero-blob blob2"></div>
+  <div class="hero-blob blob3"></div>
+  <div class="hero-blob blob4"></div>
+
   <div class="hero-content">
     <div class="hero-avatar">
-        <img src="https://cdn.discordapp.com/avatars/1039914745240752189/54a540cbd4ab5e24539f68178f361790.webp?size=128" alt="Profile" style="width:100%; height:100%; object-fit:cover;">
+      <img src="https://cdn.discordapp.com/avatars/1039914745240752189/54a540cbd4ab5e24539f68178f361790.webp?size=128" alt="Qelp Avatar">
     </div>
     <h1>Hi, I'm <span>Qelp!</span></h1>
     <p class="hero-sub">✨ Roblox Scripter & Systems Designer ✨</p>
@@ -460,55 +496,140 @@
     <div class="about-card reveal">
       <h3>Who am I? 🤔</h3>
       <p>A passionate Roblox developer specialized in gameplay programming, backend database systems, and modular framework development. I focus on writing robust, expandable code that keeps game servers running smooth and player data perfectly safe.</p>
+      <br>
     </div>
     <div class="stats-grid reveal">
-      <div class="stat-chip"><div class="stat-num">2+ yrs</div><div class="stat-label">Experience</div></div>
-      <div class="stat-chip"><div class="stat-num">UTC + 3</div><div class="stat-label">TimeZone</div></div>
+      <div class="stat-chip">
+        <div class="stat-num">2+ yrs</div>
+        <div class="stat-label">Experience</div>
+      </div>
+       <div class="stat-chip">
+        <div class="stat-num">UTC + 3</div>
+        <div class="stat-label">TimeZone</div>
+      </div>
     </div>
   </div>
 </section>
 
 <section class="skills" id="skills">
-  <div class="section-title-wrapper"><div class="section-title">My Skills 🛠️</div></div>
+  <div class="section-title-wrapper">
+    <div class="section-title">My Skills 🛠️</div>
+  </div>
+
   <div class="skills-grid">
-    <div class="skill-card reveal"><span class="skill-icon">📦</span><h4>Modular Structure</h4><p style="font-size:0.85rem;font-weight:600;color:#666">Clean & OOP codebases</p><div class="skill-bar"><div class="skill-fill" style="width:95%"></div></div></div>
-    <div class="skill-card reveal"><span class="skill-icon">🌐</span><h4>Server-Client Comm.</h4><p style="font-size:0.85rem;font-weight:600;color:#666">Clean Networking</p><div class="skill-bar"><div class="skill-fill" style="width:92%"></div></div></div>
-    <div class="skill-card reveal"><span class="skill-icon">⚡</span><h4>Well Optimized Scripts</h4><p style="font-size:0.85rem;font-weight:600;color:#666">High performance, low lag</p><div class="skill-bar"><div class="skill-fill" style="width:90%"></div></div></div>
-    <div class="skill-card reveal"><span class="skill-icon">💾</span><h4>Data Saving (ProfileStore)</h4><p style="font-size:0.85rem;font-weight:600;color:#666">Session locking & data safety</p><div class="skill-bar"><div class="skill-fill" style="width:88%"></div></div></div>
-    <div class="skill-card reveal"><span class="skill-icon">🎨</span><h4>UI Scripting & Tweens</h4><p style="font-size:0.85rem;font-weight:600;color:#666">Smooth & responsive layouts</p><div class="skill-bar"><div class="skill-fill" style="width:85%"></div></div></div>
-    <div class="skill-card reveal"><span class="skill-icon">🪙</span><h4>Monetization Systems</h4><p style="font-size:0.85rem;font-weight:600;color:#666">Gamepasses, products & shops</p><div class="skill-bar"><div class="skill-fill" style="width:91%"></div></div></div>
+    <div class="skill-card reveal">
+      <span class="skill-icon">📦</span>
+      <h4>Modular Structure</h4>
+      <p style="font-size:0.85rem;font-weight:600;color:#666">Clean & OOP codebases</p>
+      <div class="skill-bar"><div class="skill-fill" style="width:95%"></div></div>
+    </div>
+    <div class="skill-card reveal">
+      <span class="skill-icon">🌐</span>
+      <h4>Server-Client Comm.</h4>
+      <p style="font-size:0.85rem;font-weight:600;color:#666">Clean Networking</p>
+      <div class="skill-bar"><div class="skill-fill" style="width:92%"></div></div>
+    </div>
+    <div class="skill-card reveal">
+      <span class="skill-icon">⚡</span>
+      <h4>Well Optimized Scripts</h4>
+      <p style="font-size:0.85rem;font-weight:600;color:#666">High performance, low lag</p>
+      <div class="skill-bar"><div class="skill-fill" style="width:90%"></div></div>
+    </div>
+    <div class="skill-card reveal">
+      <span class="skill-icon">💾</span>
+      <h4>Data Saving (ProfileStore)</h4>
+      <p style="font-size:0.85rem;font-weight:600;color:#666">Session locking & data safety</p>
+      <div class="skill-bar"><div class="skill-fill" style="width:88%"></div></div>
+    </div>
+    <div class="skill-card reveal">
+      <span class="skill-icon">🎨</span>
+      <h4>UI Scripting & Tweens</h4>
+      <p style="font-size:0.85rem;font-weight:600;color:#666">Smooth & responsive layouts</p>
+      <div class="skill-bar"><div class="skill-fill" style="width:85%"></div></div>
+    </div>
+    <div class="skill-card reveal">
+      <span class="skill-icon">🪙</span>
+      <h4>Monetization Systems</h4>
+      <p style="font-size:0.85rem;font-weight:600;color:#666">Gamepasses, products & shops</p>
+      <div class="skill-bar"><div class="skill-fill" style="width:91%"></div></div>
+    </div>
   </div>
 </section>
 
 <section class="projects" id="projects">
-  <div class="section-title-wrapper"><div class="section-title">My Work 🌟</div></div>
+  <div class="section-title-wrapper">
+    <div class="section-title">My Work 🌟</div>
+  </div>
+  <p class="section-sub">Showcases and scripts in action</p>
+
   <div class="projects-grid">
     <div class="project-card reveal">
-      <div class="project-thumb"><iframe width="100%" height="100%" src="https://www.youtube.com/embed/DQknjgCaorI" frameborder="0" allowfullscreen></iframe></div>
-      <div class="project-body"><h3>Advanced Placement System</h3></div>
+      <div class="project-body">
+        <h3>Advanced Placement System</h3>
+      </div>
+      <iframe class="project-video" src="https://www.youtube.com/embed/DQknjgCaorI" allowfullscreen></iframe>
     </div>
     <div class="project-card reveal">
-      <div class="project-thumb"><iframe width="100%" height="100%" src="https://www.youtube.com/embed/-E85ac_U5mo" frameborder="0" allowfullscreen></iframe></div>
-      <div class="project-body"><h3>Basic Use Of PathFindingService</h3></div>
+      <div class="project-body">
+        <h3>Basic Use Of PathFindingService</h3>
+      </div>
+      <iframe class="project-video" src="https://www.youtube.com/embed/-E85ac_U5mo" allowfullscreen></iframe>
     </div>
     <div class="project-card reveal">
-      <div class="project-thumb"><iframe width="100%" height="100%" src="https://www.youtube.com/embed/WvB0-f8_4-o" frameborder="0" allowfullscreen></iframe></div>
-      <div class="project-body"><h3>Highly Scalable Gun System</h3></div>
+      <div class="project-body">
+        <h3>Highly Scalable Gun System</h3>
+      </div>
+      <iframe class="project-video" src="https://www.youtube.com/embed/WvB0-f8_4-o" allowfullscreen></iframe>
     </div>
   </div>
 </section>
 
 <section class="contact" id="contact">
+  <div class="section-title-wrapper">
+    <div class="section-title">Contact Me! 💬</div>
+  </div>
+  <p class="section-sub">Let's talk business or collaborate on a project</p>
+
   <div class="discord-box reveal">
     <h3>Have a Project in Mind? 🚀</h3>
+    <p>Reach out directly via Discord! Click the button below to open my profile.</p>
     <a href="https://discord.com/users/1039914745240752189" target="_blank" class="btn-discord">👾 Connect on Discord</a>
   </div>
 </section>
 
+<footer>
+  Qelp © 2026 | Stay Colorful ✨
+</footer>
+
 <script>
   const reveals = document.querySelectorAll('.reveal');
-  const observer = new IntersectionObserver(entries => { entries.forEach((e, i) => { if (e.isIntersecting) setTimeout(() => e.target.classList.add('visible'), i * 80); }); }, { threshold: 0.12 });
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+      }
+    });
+  }, { threshold: 0.12 });
   reveals.forEach(el => observer.observe(el));
+
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const t = document.querySelector(a.getAttribute('href'));
+      if (t) t.scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+
+  const skillCards = document.querySelectorAll('.skill-card');
+  const skillObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const fill = e.target.querySelector('.skill-fill');
+        if (fill) { const w = fill.style.width; fill.style.width = '0'; setTimeout(() => fill.style.width = w, 100); }
+      }
+    });
+  }, { threshold: 0.5 });
+  skillCards.forEach(c => skillObs.observe(c));
 </script>
 </body>
 </html>
