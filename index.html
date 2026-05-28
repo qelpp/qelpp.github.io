@@ -29,7 +29,6 @@
     cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='10' fill='%235BC8E8' stroke='%231A1A1A' stroke-width='2.5'/%3E%3C/svg%3E") 12 12, auto;
   }
 
-  /* ─── BACKGROUND DOTS ─── */
   body::before {
     content: '';
     position: fixed;
@@ -41,7 +40,6 @@
     z-index: 0;
   }
 
-  /* ─── NAV ─── */
   nav {
     position: sticky;
     top: 0;
@@ -83,7 +81,6 @@
     transform: translateY(-3px) rotate(-1deg);
   }
 
-  /* ─── HERO ─── */
   .hero {
     position: relative;
     z-index: 1;
@@ -128,7 +125,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 4rem;
   }
 
   @keyframes avatarBounce {
@@ -187,7 +183,6 @@
   .btn-primary { background: var(--coral); color: var(--white); }
   .btn-secondary { background: var(--white); color: var(--outline); }
 
-  /* ─── SECTION SHARED ─── */
   section { position: relative; z-index: 1; padding: 5rem 2rem; }
 
   .section-title-wrapper { text-align: center; margin-bottom: 0.5rem; }
@@ -209,14 +204,8 @@
     border: 2px solid var(--outline);
   }
 
-  .section-sub {
-    text-align: center;
-    font-weight: 600;
-    color: #555;
-    margin-bottom: 3rem;
-  }
+  .section-sub { text-align: center; font-weight: 600; color: #555; margin-bottom: 3rem; }
 
-  /* ─── ABOUT ─── */
   .about { background: var(--sky); border-top: var(--outline-w) solid var(--outline); border-bottom: var(--outline-w) solid var(--outline); }
 
   .about-inner {
@@ -243,12 +232,7 @@
     50% { transform: rotate(1.5deg); }
   }
 
-  .about-card h3 {
-    font-family: 'Fredoka One', cursive;
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
-    color: var(--coral);
-  }
+  .about-card h3 { font-family: 'Fredoka One', cursive; font-size: 1.5rem; margin-bottom: 1rem; color: var(--coral); }
 
   .about-card p { font-size: 1rem; font-weight: 600; line-height: 1.8; color: #333; }
 
@@ -265,14 +249,9 @@
   }
   .stat-chip:hover { transform: translateY(-4px) rotate(1deg); }
 
-  .stat-num {
-    font-family: 'Fredoka One', cursive;
-    font-size: 2rem;
-    color: var(--coral);
-  }
+  .stat-num { font-family: 'Fredoka One', cursive; font-size: 2rem; color: var(--coral); }
   .stat-label { font-size: 0.8rem; font-weight: 700; color: #555; text-transform: uppercase; letter-spacing: 1px; }
 
-  /* ─── SKILLS ─── */
   .skills { background: var(--cream); }
 
   .skills-grid {
@@ -294,34 +273,14 @@
   }
   .skill-card:hover { transform: translate(-3px, -3px); box-shadow: 8px 8px 0 var(--outline); }
 
-  .skill-icon {
-    font-size: 2.5rem;
-    margin-bottom: 0.8rem;
-    display: block;
-  }
+  .skill-icon { font-size: 2.5rem; margin-bottom: 0.8rem; display: block; }
 
-  .skill-card h4 {
-    font-family: 'Fredoka One', cursive;
-    font-size: 1.1rem;
-    margin-bottom: 0.5rem;
-  }
+  .skill-card h4 { font-family: 'Fredoka One', cursive; font-size: 1.1rem; margin-bottom: 0.5rem; }
 
-  .skill-bar {
-    height: 12px;
-    background: #eee;
-    border: 2px solid var(--outline);
-    border-radius: 6px;
-    overflow: hidden;
-    margin-top: 0.5rem;
-  }
+  .skill-bar { height: 12px; background: #eee; border: 2px solid var(--outline); border-radius: 6px; overflow: hidden; margin-top: 0.5rem; }
 
-  .skill-fill {
-    height: 100%;
-    border-radius: 4px;
-    transition: width 1.2s cubic-bezier(.4,0,.2,1);
-  }
+  .skill-fill { height: 100%; border-radius: 4px; transition: width 1.2s cubic-bezier(.4,0,.2,1); }
 
-  /* Renk doldurma eşleşmeleri */
   .skill-card:nth-child(1) .skill-fill { background: var(--sky); }
   .skill-card:nth-child(2) .skill-fill { background: var(--coral); }
   .skill-card:nth-child(3) .skill-fill { background: var(--yellow); }
@@ -329,7 +288,6 @@
   .skill-card:nth-child(5) .skill-fill { background: var(--purple); }
   .skill-card:nth-child(6) .skill-fill { background: var(--coral); }
 
-  /* ─── PROJECTS ─── */
   .projects { background: var(--yellow); border-top: var(--outline-w) solid var(--outline); border-bottom: var(--outline-w) solid var(--outline); }
 
   .projects-grid {
@@ -351,11 +309,7 @@
   .project-card:hover { transform: translate(-4px, -4px); box-shadow: 10px 10px 0 var(--outline); }
 
   .project-thumb {
-    height: 140px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 3.5rem;
+    height: 200px;
     border-bottom: 3px solid var(--outline);
   }
 
@@ -375,29 +329,8 @@
     margin-bottom: 0.6rem;
   }
 
-  .project-body h3 {
-    font-family: 'Fredoka One', cursive;
-    font-size: 1.3rem;
-    margin-bottom: 0.5rem;
-  }
+  .project-body h3 { font-family: 'Fredoka One', cursive; font-size: 1.3rem; margin-bottom: 0.5rem; }
 
-  .project-body p { font-size: 0.93rem; font-weight: 600; color: #444; line-height: 1.6; margin-bottom: 1rem; }
-
-  .project-link {
-    font-family: 'Fredoka One', cursive;
-    font-size: 0.95rem;
-    color: var(--outline);
-    text-decoration: none;
-    background: var(--yellow);
-    border: 2px solid var(--outline);
-    border-radius: 50px;
-    padding: 0.3rem 1rem;
-    transition: background 0.15s, transform 0.15s;
-    display: inline-block;
-  }
-  .project-link:hover { background: var(--coral); color: var(--white); transform: rotate(-2deg); }
-
-  /* ─── CONTACT (DISCORD ONLY) ─── */
   .contact { background: var(--cream); text-align: center; }
 
   .discord-box {
@@ -410,17 +343,9 @@
     box-shadow: 8px 8px 0 var(--outline);
   }
 
-  .discord-box h3 {
-    font-family: 'Fredoka One', cursive;
-    font-size: 1.6rem;
-    margin-bottom: 1rem;
-  }
+  .discord-box h3 { font-family: 'Fredoka One', cursive; font-size: 1.6rem; margin-bottom: 1rem; }
 
-  .discord-box p {
-    font-weight: 600;
-    color: #555;
-    margin-bottom: 1.5rem;
-  }
+  .discord-box p { font-weight: 600; color: #555; margin-bottom: 1.5rem; }
 
   .btn-discord {
     font-family: 'Fredoka One', cursive;
@@ -428,7 +353,7 @@
     padding: 0.8rem 2.5rem;
     border: 3px solid var(--outline);
     border-radius: 50px;
-    background: #5865F2; /* Discord Blurple */
+    background: #5865F2;
     color: var(--white);
     text-decoration: none;
     display: inline-block;
@@ -436,9 +361,7 @@
     transition: transform 0.15s, box-shadow 0.15s;
   }
   .btn-discord:hover { transform: translate(-3px, -3px); box-shadow: 8px 8px 0 var(--outline); background: #4752C4; }
-  .btn-discord:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0 var(--outline); }
 
-  /* ─── FOOTER ─── */
   footer {
     background: var(--outline);
     color: var(--white);
@@ -450,19 +373,7 @@
     z-index: 1;
   }
 
-  /* ─── FLOATING STARS ─── */
-  .star {
-    position: fixed;
-    pointer-events: none;
-    z-index: 0;
-    animation: starSpin 8s linear infinite;
-    font-size: 1.5rem;
-    opacity: 0.35;
-  }
-  .star:nth-child(1) { top: 12%; left: 5%; animation-duration: 7s; }
-  .star:nth-child(2) { top: 70%; left: 92%; animation-duration: 9s; animation-direction: reverse; }
-  .star:nth-child(3) { top: 45%; left: 3%; animation-duration: 11s; }
-  .star:nth-child(4) { top: 85%; left: 50%; animation-duration: 6s; animation-direction: reverse; }
+  .star { position: fixed; pointer-events: none; z-index: 0; animation: starSpin 8s linear infinite; font-size: 1.5rem; opacity: 0.35; }
 
   @keyframes starSpin {
     from { transform: rotate(0deg) scale(1); }
@@ -470,24 +381,11 @@
     to { transform: rotate(360deg) scale(1); }
   }
 
-  /* ─── SCROLL REVEAL ─── */
   .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.6s, transform 0.6s; }
   .reveal.visible { opacity: 1; transform: none; }
-
-  /* ─── RESPONSIVE ─── */
-  @media (max-width: 700px) {
-    nav { padding: 0.8rem 1rem; }
-    .nav-links { gap: 0.5rem; }
-    .about-inner { grid-template-columns: 1fr; }
-  }
 </style>
 </head>
 <body>
-
-<div class="star" style="color:#5BC8E8">★</div>
-<div class="star" style="color:#FF7875">★</div>
-<div class="star" style="color:#FFD166">✦</div>
-<div class="star" style="color:#06D6A0">★</div>
 
 <nav>
   <div class="nav-logo">✦ Qelp Portfolio</div>
@@ -500,83 +398,14 @@
 </nav>
 
 <section class="hero" id="home">
-  <div class="hero-blob blob1"></div>
-  <div class="hero-blob blob2"></div>
-  <div class="hero-blob blob3"></div>
-  <div class="hero-blob blob4"></div>
-
   <div class="hero-content">
-    <div class="hero-avatar">💻</div>
+    <div class="hero-avatar">
+      <img src="https://cdn.discordapp.com/avatars/1039914745240752189/54a540cbd4ab5e24539f68178f361790.webp?size=128" alt="Qelp" style="width:100%; height:100%; object-fit:cover;">
+    </div>
     <h1>Hi, I'm <span>Qelp!</span></h1>
     <p class="hero-sub">✨ Roblox Scripter & Systems Designer ✨</p>
-    <p class="hero-desc">I craft clean, optimized, and secure Luau code to bring immersive gameplay mechanics to life on the Roblox platform.</p>
     <a href="#projects" class="btn btn-primary">See My Work 🚀</a>
     <a href="#contact" class="btn btn-secondary">Say Hello 👋</a>
-  </div>
-</section>
-
-<section class="about" id="about">
-  <div class="about-inner">
-    <div class="about-card reveal">
-      <h3>Who am I? 🤔</h3>
-      <p>A passionate Roblox developer specialized in gameplay programming, backend database systems, and modular framework development. I focus on writing robust, expandable code that keeps game servers running smooth and player data perfectly safe.</p>
-      <br>
-    </div>
-    <div class="stats-grid reveal">
-      <div class="stat-chip">
-        <div class="stat-num">2+ yrs</div>
-        <div class="stat-label">Experience</div>
-      </div>
-       <div class="stat-chip">
-        <div class="stat-num">UTC + 3</div>
-        <div class="stat-label">TimeZone</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="skills" id="skills">
-  <div class="section-title-wrapper">
-    <div class="section-title">My Skills 🛠️</div>
-  </div>
-
-  <div class="skills-grid">
-    <div class="skill-card reveal">
-      <span class="skill-icon">📦</span>
-      <h4>Modular Structure</h4>
-      <p style="font-size:0.85rem;font-weight:600;color:#666">Clean & OOP codebases</p>
-      <div class="skill-bar"><div class="skill-fill" style="width:95%"></div></div>
-    </div>
-    <div class="skill-card reveal">
-      <span class="skill-icon">🌐</span>
-      <h4>Server-Client Comm.</h4>
-      <p style="font-size:0.85rem;font-weight:600;color:#666">Clean Networking</p>
-      <div class="skill-bar"><div class="skill-fill" style="width:92%"></div></div>
-    </div>
-    <div class="skill-card reveal">
-      <span class="skill-icon">⚡</span>
-      <h4>Well Optimized Scripts</h4>
-      <p style="font-size:0.85rem;font-weight:600;color:#666">High performance, low lag</p>
-      <div class="skill-bar"><div class="skill-fill" style="width:90%"></div></div>
-    </div>
-    <div class="skill-card reveal">
-      <span class="skill-icon">💾</span>
-      <h4>Data Saving (ProfileStore)</h4>
-      <p style="font-size:0.85rem;font-weight:600;color:#666">Session locking & data safety</p>
-      <div class="skill-bar"><div class="skill-fill" style="width:88%"></div></div>
-    </div>
-    <div class="skill-card reveal">
-      <span class="skill-icon">🎨</span>
-      <h4>UI Scripting & Tweens</h4>
-      <p style="font-size:0.85rem;font-weight:600;color:#666">Smooth & responsive layouts</p>
-      <div class="skill-bar"><div class="skill-fill" style="width:85%"></div></div>
-    </div>
-    <div class="skill-card reveal">
-      <span class="skill-icon">🪙</span>
-      <h4>Monetization Systems</h4>
-      <p style="font-size:0.85rem;font-weight:600;color:#666">Gamepasses, products & shops</p>
-      <div class="skill-bar"><div class="skill-fill" style="width:91%"></div></div>
-    </div>
   </div>
 </section>
 
@@ -588,51 +417,36 @@
 
   <div class="projects-grid">
     <div class="project-card reveal">
-      <div class="project-thumb" style="background:#E8F9FF">🛠️</div>
+      <div class="project-thumb">
+        <iframe width="100%" height="100%" src="https://www.youtube.com/embed/DQknjgCaorI" frameborder="0" allowfullscreen></iframe>
+      </div>
       <div class="project-body">
         <span class="project-tag" style="background:var(--purple);color:white">Roblox System</span>
         <h3>Advanced Placement System</h3>
-        <p>Clean Modular Advanced Placement System.</p>
-        <a href="https://www.youtube.com/watch?v=DQknjgCaorI" target="_blank" class="project-link">Watch Showcase →</a>
       </div>
     </div>
+    
     <div class="project-card reveal">
-      <div class="project-thumb" style="background:#FFF3E0">🤖</div>
+      <div class="project-thumb">
+        <iframe width="100%" height="100%" src="https://www.youtube.com/embed/-E85ac_U5mo" frameborder="0" allowfullscreen></iframe>
+      </div>
       <div class="project-body">
         <span class="project-tag" style="background:var(--coral);color:white">AI / Navigation</span>
         <h3>Basic Use Of PathFindingService</h3>
-        <p>Basic Use Of PathFindingService</p>
-        <a href="https://www.youtube.com/watch?v=-E85ac_U5mo" target="_blank" class="project-link">Watch Showcase →</a>
       </div>
     </div>
+
     <div class="project-card reveal">
-      <div class="project-thumb" style="background:#F0FFF4">💥</div>
+      <div class="project-thumb">
+        <iframe width="100%" height="100%" src="https://www.youtube.com/embed/WvB0-f8_4-o" frameborder="0" allowfullscreen></iframe>
+      </div>
       <div class="project-body">
         <span class="project-tag" style="background:var(--green)">Combat System</span>
         <h3>Highly Scalable Gun System</h3>
-        <p>Highly Scalable Gun System.</p>
-        <a href="https://www.youtube.com/watch?v=WvB0-f8_4-o" target="_blank" class="project-link">Watch Showcase →</a>
       </div>
     </div>
   </div>
 </section>
-
-<section class="contact" id="contact">
-  <div class="section-title-wrapper">
-    <div class="section-title">Contact Me! 💬</div>
-  </div>
-  <p class="section-sub">Let's talk business or collaborate on a project</p>
-
-  <div class="discord-box reveal">
-    <h3>Have a Project in Mind? 🚀</h3>
-    <p>Reach out directly via Discord! Click the button below to open my profile.</p>
-    <a href="https://discord.com/users/1039914745240752189" target="_blank" class="btn-discord">👾 Connect on Discord</a>
-  </div>
-</section>
-
-<footer>
-  Qelp © 2026 | Stay Colorful ✨
-</footer>
 
 <script>
   const reveals = document.querySelectorAll('.reveal');
@@ -644,25 +458,6 @@
     });
   }, { threshold: 0.12 });
   reveals.forEach(el => observer.observe(el));
-
-  document.querySelectorAll('a[href^="#"]').forEach(a => {
-    a.addEventListener('click', e => {
-      e.preventDefault();
-      const t = document.querySelector(a.getAttribute('href'));
-      if (t) t.scrollIntoView({ behavior: 'smooth' });
-    });
-  });
-
-  const skillCards = document.querySelectorAll('.skill-card');
-  const skillObs = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        const fill = e.target.querySelector('.skill-fill');
-        if (fill) { const w = fill.style.width; fill.style.width = '0'; setTimeout(() => fill.style.width = w, 100); }
-      }
-    });
-  }, { threshold: 0.5 });
-  skillCards.forEach(c => skillObs.observe(c));
 </script>
 </body>
 </html>
