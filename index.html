@@ -122,6 +122,9 @@
     box-shadow: 6px 6px 0 var(--outline);
     overflow: hidden;
     animation: avatarBounce 3s ease-in-out infinite;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   @keyframes avatarBounce {
@@ -193,24 +196,9 @@
 
   .section-sub { text-align: center; font-weight: 600; color: #555; margin-bottom: 3rem; }
 
-  /* SKILLS STYLES */
   .skills { background: var(--cream); }
-  .skills-grid {
-    max-width: 1000px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 1.5rem;
-  }
-  .skill-card {
-    background: var(--white);
-    border: 3px solid var(--outline);
-    border-radius: 20px;
-    padding: 1.5rem;
-    box-shadow: 5px 5px 0 var(--outline);
-    transition: transform 0.15s, box-shadow 0.15s;
-    text-align: center;
-  }
+  .skills-grid { max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; }
+  .skill-card { background: var(--white); border: 3px solid var(--outline); border-radius: 20px; padding: 1.5rem; box-shadow: 5px 5px 0 var(--outline); transition: transform 0.15s, box-shadow 0.15s; text-align: center; }
   .skill-card:hover { transform: translate(-3px, -3px); box-shadow: 8px 8px 0 var(--outline); }
   .skill-icon { font-size: 2.5rem; margin-bottom: 0.8rem; display: block; }
   .skill-card h4 { font-family: 'Fredoka One', cursive; font-size: 1.1rem; margin-bottom: 0.5rem; }
@@ -223,41 +211,18 @@
   .skill-card:nth-child(5) .skill-fill { background: var(--purple); }
   .skill-card:nth-child(6) .skill-fill { background: var(--coral); }
 
-  /* PROJECTS STYLES */
   .projects { background: var(--yellow); border-top: var(--outline-w) solid var(--outline); border-bottom: var(--outline-w) solid var(--outline); }
-  .projects-grid {
-    max-width: 1000px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1.5rem;
-  }
-  .project-card {
-    background: var(--white);
-    border: 3px solid var(--outline);
-    border-radius: 20px;
-    overflow: hidden;
-    box-shadow: 6px 6px 0 var(--outline);
-    transition: transform 0.15s, box-shadow 0.15s;
-  }
-  .project-card:hover { transform: translate(-4px, -4px); box-shadow: 10px 10px 0 var(--outline); }
-  .project-thumb { height: 200px; border-bottom: 3px solid var(--outline); }
-  .project-body { padding: 1.2rem 1.5rem 1.5rem; }
-  .project-tag {
-    font-size: 0.72rem;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    background: var(--sky);
-    color: var(--outline);
-    border: 2px solid var(--outline);
-    border-radius: 50px;
-    padding: 0.2rem 0.7rem;
-    display: inline-block;
-    margin-bottom: 0.6rem;
-  }
-  .project-body h3 { font-family: 'Fredoka One', cursive; font-size: 1.3rem; margin-bottom: 0.5rem; }
+  .projects-grid { max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; }
+  .project-card { background: var(--white); border: 3px solid var(--outline); border-radius: 20px; overflow: hidden; box-shadow: 6px 6px 0 var(--outline); padding: 10px; }
+  .project-thumb { width: 100%; height: 250px; }
+  .project-body { padding: 1rem 0; text-align: center; }
+  .project-body h3 { font-family: 'Fredoka One', cursive; font-size: 1.3rem; }
 
+  .contact { background: var(--cream); text-align: center; }
+  .discord-box { max-width: 500px; margin: 0 auto; background: var(--white); border: 3px solid var(--outline); border-radius: 24px; padding: 2.5rem; box-shadow: 8px 8px 0 var(--outline); }
+  .btn-discord { font-family: 'Fredoka One', cursive; font-size: 1.3rem; padding: 0.8rem 2.5rem; border: 3px solid var(--outline); border-radius: 50px; background: #5865F2; color: var(--white); text-decoration: none; display: inline-block; box-shadow: 5px 5px 0 var(--outline); }
+  
+  footer { background: var(--outline); color: var(--white); text-align: center; padding: 1.5rem; font-family: 'Fredoka One', cursive; }
   .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.6s, transform 0.6s; }
   .reveal.visible { opacity: 1; transform: none; }
 </style>
@@ -286,20 +251,6 @@
   </div>
 </section>
 
-<section class="skills" id="skills">
-  <div class="section-title-wrapper"><div class="section-title">My Skills 🛠️</div></div>
-  <div class="skills-grid">
-    <div class="skill-card reveal">
-      <span class="skill-icon">📦</span><h4>Modular Structure</h4>
-      <div class="skill-bar"><div class="skill-fill" style="width:95%"></div></div>
-    </div>
-    <div class="skill-card reveal">
-      <span class="skill-icon">🌐</span><h4>Networking</h4>
-      <div class="skill-bar"><div class="skill-fill" style="width:92%"></div></div>
-    </div>
-  </div>
-</section>
-
 <section class="projects" id="projects">
   <div class="section-title-wrapper"><div class="section-title">My Work 🌟</div></div>
   <div class="projects-grid">
@@ -307,29 +258,34 @@
       <div class="project-thumb">
         <iframe width="100%" height="100%" src="https://www.youtube.com/embed/DQknjgCaorI" frameborder="0" allowfullscreen></iframe>
       </div>
-      <div class="project-body">
-        <span class="project-tag" style="background:var(--purple);color:white">Roblox System</span>
-        <h3>Advanced Placement System</h3>
-      </div>
+      <div class="project-body"><h3>Advanced Placement System</h3></div>
     </div>
     <div class="project-card reveal">
       <div class="project-thumb">
         <iframe width="100%" height="100%" src="https://www.youtube.com/embed/-E85ac_U5mo" frameborder="0" allowfullscreen></iframe>
       </div>
-      <div class="project-body">
-        <span class="project-tag" style="background:var(--coral);color:white">AI / Navigation</span>
-        <h3>PathFindingService</h3>
-      </div>
+      <div class="project-body"><h3>PathFindingService</h3></div>
     </div>
+    <div class="project-card reveal">
+      <div class="project-thumb">
+        <iframe width="100%" height="100%" src="https://www.youtube.com/embed/WvB0-f8_4-o" frameborder="0" allowfullscreen></iframe>
+      </div>
+      <div class="project-body"><h3>Scalable Gun System</h3></div>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="discord-box reveal">
+    <h3>Have a Project in Mind? 🚀</h3>
+    <a href="https://discord.com/users/1039914745240752189" target="_blank" class="btn-discord">👾 Connect on Discord</a>
   </div>
 </section>
 
 <script>
   const reveals = document.querySelectorAll('.reveal');
   const observer = new IntersectionObserver(entries => {
-    entries.forEach((e, i) => {
-      if (e.isIntersecting) { setTimeout(() => e.target.classList.add('visible'), i * 80); }
-    });
+    entries.forEach((e, i) => { if (e.isIntersecting) setTimeout(() => e.target.classList.add('visible'), i * 80); });
   }, { threshold: 0.12 });
   reveals.forEach(el => observer.observe(el));
 </script>
