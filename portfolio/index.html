@@ -23,20 +23,25 @@
 
   body {
     font-family: 'Nunito', sans-serif;
-    background: var(--cream);
+    /* ARKA PLAN EKLENDİ */
+    background-color: var(--cream);
+    background-image: radial-gradient(var(--sky) 1.5px, transparent 1.5px), 
+                      radial-gradient(var(--coral) 1.5px, transparent 1.5px);
+    background-size: 50px 50px;
+    background-position: 0 0, 25px 25px;
     color: var(--outline);
     overflow-x: hidden;
     cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='10' fill='%235BC8E8' stroke='%231A1A1A' stroke-width='2.5'/%3E%3C/svg%3E") 12 12, auto;
   }
 
-  /* ─── BACKGROUND DOTS ─── */
+  /* ─── BACKGROUND DOTS (Ekstra gölge katmanı) ─── */
   body::before {
     content: '';
     position: fixed;
     inset: 0;
     background-image: radial-gradient(circle, #1A1A1A 1.5px, transparent 1.5px);
     background-size: 30px 30px;
-    opacity: 0.06;
+    opacity: 0.04;
     pointer-events: none;
     z-index: 0;
   }
@@ -196,6 +201,17 @@
 
   /* ─── SECTION SHARED ─── */
   section { position: relative; z-index: 1; padding: 5rem 2rem; }
+        
+  section::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle, #1A1A1A 1.5px, transparent 1.5px);
+    background-size: 30px 30px;
+    opacity: 0.05;
+    pointer-events: none;
+    z-index: -1;
+  }
 
   .section-title-wrapper { text-align: center; margin-bottom: 0.5rem; }
 
@@ -224,7 +240,7 @@
   }
 
   /* ─── ABOUT ─── */
-  .about { background: var(--sky); border-top: var(--outline-w) solid var(--outline); border-bottom: var(--outline-w) solid var(--outline); }
+  .about { background: rgba(91, 200, 232, 0.9); border-top: var(--outline-w) solid var(--outline); border-bottom: var(--outline-w) solid var(--outline); }
 
   .about-inner {
     max-width: 900px;
@@ -280,7 +296,7 @@
   .stat-label { font-size: 0.8rem; font-weight: 700; color: #555; text-transform: uppercase; letter-spacing: 1px; }
 
   /* ─── SKILLS ─── */
-  .skills { background: var(--cream); }
+  .skills { background: transparent; }
 
   .skills-grid {
     max-width: 1000px;
@@ -336,7 +352,7 @@
   .skill-card:nth-child(6) .skill-fill { background: var(--coral); }
 
   /* ─── PROJECTS ─── */
-  .projects { background: var(--yellow); border-top: var(--outline-w) solid var(--outline); border-bottom: var(--outline-w) solid var(--outline); }
+  .projects { background: rgba(255, 209, 102, 0.9); border-top: var(--outline-w) solid var(--outline); border-bottom: var(--outline-w) solid var(--outline); }
 
   .projects-grid {
     max-width: 1000px;
@@ -372,16 +388,16 @@
   }
 
   /* ─── PRICING ─── */
-  .pricing { background: var(--white); padding: 5rem 2rem; border-bottom: var(--outline-w) solid var(--outline); }
+  .pricing { background: rgba(255,255,255,0.9); padding: 5rem 2rem; border-bottom: var(--outline-w) solid var(--outline); }
   .pricing-grid { max-width: 900px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
   .price-card { background: var(--cream); border: 3px solid var(--outline); border-radius: 24px; padding: 2rem; box-shadow: 6px 6px 0 var(--outline); }
   .price-card h3 { font-family: 'Fredoka One', cursive; font-size: 1.5rem; margin-bottom: 1rem; color: var(--coral); }
   .price-card p { font-weight: 600; color: #444; margin-bottom: 1.5rem; line-height: 1.6; }
   .payment-methods { list-style: none; margin-top: 1rem; }
   .payment-methods li { background: var(--white); border: 2.5px solid var(--outline); padding: 0.7rem 1rem; margin-bottom: 0.5rem; border-radius: 12px; font-weight: 700; display: flex; align-items: center; gap: 10px; box-shadow: 3px 3px 0 var(--outline); }
-
+  
   /* ─── CONTACT ─── */
-  .contact { background: var(--cream); text-align: center; }
+  .contact { background: transparent; text-align: center; }
 
   .discord-box {
     max-width: 500px;
@@ -589,7 +605,7 @@
       <div class="project-body">
         <h3>Highly Scalable Gun System</h3>
       </div>
-      <iframe class="project-video" src="https://www.youtube.com/embed/t8o7YoU2Wr8" allowfullscreen></iframe>
+      <iframe class="project-video" src="https://www.youtube.com/embed/WvB0-f8_4-o" allowfullscreen></iframe>
     </div>
     <div class="project-card reveal">
       <div class="project-body">
