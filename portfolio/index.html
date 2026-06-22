@@ -815,7 +815,7 @@
   </div>
   <div class="about-grid">
     <div class="about-card reveal">
-      <div style="margin-bottom: 1rem;"><span class="hero-avatar"><img src="https://cdn.discordapp.com/avatars/1039914745240752189/d9598db25a7e851f365bdfb3c2e10630.webp?size=128" alt="Qelp avatar"></span><strong>Qelp</strong></div>
+      <div style="margin-bottom: 1rem;"><span class="hero-avatar"><img src="Profile.png" alt="Qelp avatar"></span><strong>Qelp</strong></div>
       <p>A passionate Roblox developer specialized in gameplay programming, backend database systems, and modular framework development. I focus on writing robust, expandable code that keeps game servers running smooth and player data perfectly safe.</p>
     </div>
     <div class="stats-grid reveal">
@@ -934,8 +934,8 @@
 
   <div class="work-panel" data-work-panel="games">
     <div class="games-grid">
-      <article class="game-card reveal" data-place-id="114812891420300">
-        <div class="thumb-placeholder">loading thumbnail...</div>
+      <article class="game-card reveal">
+        <img src="thumb.png" class="game-thumb" alt="Be A Dealer For Brainrots thumbnail">
         <div class="game-body">
           <span class="game-meta">Roblox experience / economy & trading</span>
           <h3>Be A Dealer For Brainrots</h3>
@@ -946,8 +946,8 @@
         </div>
       </article>
 
-      <article class="game-card reveal" data-place-id="110894386541423">
-        <div class="thumb-placeholder">loading thumbnail...</div>
+      <article class="game-card reveal">
+        <img src="due.png" class="game-thumb" alt="Due Process thumbnail">
         <div class="game-body">
           <span class="game-meta">Roblox experience / roleplay systems</span>
           <h3>Due Process</h3>
@@ -1037,37 +1037,6 @@
     });
   });
 
-  async function loadRobloxThumbnails() {
-    const cards = Array.from(document.querySelectorAll('.game-card[data-place-id]'));
-    if (!cards.length) return;
-
-    const placeIds = cards.map(card => card.dataset.placeId).join(',');
-    const url = `https://thumbnails.roblox.com/v1/places/gameicons?placeIds=${placeIds}&returnPolicy=PlaceHolder&size=512x512&format=Png&isCircular=false`;
-
-    try {
-      const res = await fetch(url);
-      const json = await res.json();
-      const thumbnails = new Map((json.data || []).map(item => [String(item.targetId), item.imageUrl]));
-
-      cards.forEach(card => {
-        const imageUrl = thumbnails.get(card.dataset.placeId);
-        const placeholder = card.querySelector('.thumb-placeholder');
-        if (!imageUrl || !placeholder) return;
-
-        const img = document.createElement('img');
-        img.className = 'game-thumb';
-        img.src = imageUrl;
-        img.alt = `${card.querySelector('h3')?.textContent || 'Roblox game'} thumbnail`;
-        placeholder.replaceWith(img);
-      });
-    } catch (err) {
-      document.querySelectorAll('.thumb-placeholder').forEach(el => {
-        el.textContent = 'thumbnail unavailable';
-      });
-    }
-  }
-
-  loadRobloxThumbnails();
 
   const skillCards = document.querySelectorAll('.skill-card');
   const skillObs = new IntersectionObserver(entries => {
