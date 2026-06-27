@@ -1,1230 +1,1451 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Qelp — Portfolio</title>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Qelp — Roblox Developer Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
 <style>
   :root {
-    --bg: #0B0D12;
-    --bg-soft: #11141B;
-    --surface: #161A23;
-    --surface-2: #1D222D;
-    --border: #2A3040;
-    --cyan: #5BE0D8;
-    --magenta: #FF5C8A;
-    --amber: #FFC857;
-    --text: #E8EAF0;
-    --muted: #8A93A6;
-    --radius: 14px;
+    --bg: #02040A;
+    --bg-2: #050B16;
+    --surface: rgba(6, 16, 32, 0.95);
+    --surface-solid: #07101F;
+    --surface-2: rgba(10, 24, 45, 0.95);
+    --card: rgba(8, 20, 38, 0.95);
+    --border: rgba(120, 165, 230, 0.18);
+    --border-strong: rgba(96, 165, 250, 0.42);
+
+    --primary: #1D4ED8;
+    --primary-2: #2563EB;
+    --primary-3: #60A5FA;
+    --cyan: #2563EB;
+    --accent: #3B82F6;
+
+    --text: #F8FAFC;
+    --muted: #64748B;
+    --muted-2: #CBD5E1;
+
+    --shadow: 0 30px 100px rgba(0, 0, 0, 0.75);
+    --glow: 0 0 30px rgba(29, 78, 216, 0.12);
+    --radius: 22px;
+    --radius-sm: 14px;
   }
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
 
-  html { scroll-behavior: smooth; }
+  html {
+    scroll-behavior: smooth;
+  }
 
   body {
-    font-family: 'Inter', sans-serif;
-    background: var(--bg);
+    min-height: 100vh;
+    font-family: "Inter", sans-serif;
+    background:
+      radial-gradient(circle at 20% 0%, rgba(29,78,216,0.08), transparent 20%),
+      radial-gradient(circle at 80% 15%, rgba(37,99,235,0.06), transparent 20%),
+      linear-gradient(180deg, #02040A, #040B16 40%, #020712 100%);
     color: var(--text);
-    line-height: 1.6;
     overflow-x: hidden;
   }
 
-  /* faint grid background */
   body::before {
-    content: '';
+    content: "";
     position: fixed;
     inset: 0;
     background-image:
-      linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
-    background-size: 48px 48px;
+      linear-gradient(rgba(100, 140, 200, 0.022) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(100, 140, 200, 0.022) 1px, transparent 1px);
+    background-size: 72px 72px;
+    mask-image: linear-gradient(to bottom, rgba(0,0,0,0.9), rgba(0,0,0,0.2));
     pointer-events: none;
     z-index: 0;
   }
 
-  /* ambient floating particles */
-  .particle {
+  body::after {
+    content: "";
     position: fixed;
-    border-radius: 50%;
+    inset: 0;
+    background: radial-gradient(circle at var(--mx, 50%) var(--my, 30%), rgba(29, 78, 216, 0.08), transparent 20%);
     pointer-events: none;
     z-index: 0;
-    opacity: 0.5;
-    filter: blur(1px);
-    animation: particleFloat linear infinite;
-  }
-  @keyframes particleFloat {
-    0% { transform: translate(0, 0) scale(1); }
-    25% { transform: translate(20px, -30px) scale(1.1); }
-    50% { transform: translate(-10px, -60px) scale(0.95); }
-    75% { transform: translate(-30px, -20px) scale(1.05); }
-    100% { transform: translate(0, 0) scale(1); }
+    transition: background 0.08s linear;
   }
 
-  h1, h2, h3, h4 { font-family: 'Space Grotesk', sans-serif; letter-spacing: -0.01em; }
+  a {
+    color: inherit;
+  }
 
-  .mono { font-family: 'JetBrains Mono', monospace; }
+  .page {
+    position: relative;
+    z-index: 1;
+  }
 
-  /* ─── NAV ─── */
-  nav {
+  .blob {
+    position: fixed;
+    width: 360px;
+    height: 360px;
+    border-radius: 999px;
+    background: rgba(29, 78, 216, 0.04);
+    filter: blur(82px);
+    pointer-events: none;
+    z-index: 0;
+    animation: blobFloat 13s ease-in-out infinite alternate;
+  }
+
+  .blob.one { left: -130px; top: 12%; }
+  .blob.two {
+    right: -150px;
+    top: 58%;
+    background: rgba(37, 99, 235, 0.035);
+    animation-delay: -4s;
+  }
+
+  @keyframes blobFloat {
+    from { transform: translate3d(0, 0, 0) scale(1); }
+    to { transform: translate3d(42px, -34px, 0) scale(1.12); }
+  }
+
+  /* NAV */
+  .nav-wrap {
     position: sticky;
     top: 0;
-    z-index: 100;
-    background: rgba(11,13,18,0.75);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid var(--border);
+    z-index: 50;
+    padding: 16px 24px 0;
+  }
+
+  nav {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 14px 18px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 1rem 3rem;
+    background: rgba(2, 6, 18, 0.86);
+    border: 1px solid rgba(120, 165, 230, 0.18);
+    border-radius: 18px;
+    backdrop-filter: blur(18px);
+    box-shadow: 0 22px 60px rgba(0, 0, 0, 0.42);
   }
 
-  .nav-logo {
-    font-family: 'Space Grotesk', sans-serif;
-    font-weight: 700;
-    font-size: 1.2rem;
-    color: var(--text);
+  .brand {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 12px;
+    text-decoration: none;
+    font-weight: 800;
+    letter-spacing: -0.03em;
   }
-  .nav-logo .dot { color: var(--cyan); }
 
-  .nav-links { display: flex; gap: 2rem; }
+  .brand-mark {
+    width: 38px;
+    height: 38px;
+    border-radius: 12px;
+    display: grid;
+    place-items: center;
+    color: #fff;
+    background:
+      linear-gradient(135deg, #1D4ED8, #2563EB);
+    box-shadow: 0 0 26px rgba(59, 130, 246, 0.35);
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.95rem;
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+  }
 
   .nav-links a {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.85rem;
-    color: var(--muted);
     text-decoration: none;
-    transition: color 0.2s;
-    position: relative;
+    font-size: 0.88rem;
+    color: var(--muted-2);
+    font-weight: 600;
+    transition: color 0.2s, text-shadow 0.2s;
   }
-  .nav-links a:hover { color: var(--cyan); }
-  .nav-links a::before { content: '/'; color: var(--border); margin-right: 0.3rem; }
 
-  /* ─── HERO ─── */
-  .hero {
-    position: relative;
-    z-index: 1;
-    min-height: 92vh;
-    display: flex;
-    align-items: center;
-    padding: 4rem 3rem;
-    max-width: 1200px;
+  .nav-links a:hover {
+    color: var(--primary-3);
+    text-shadow: 0 0 18px rgba(147, 197, 253, 0.45);
+  }
+
+  .nav-cta {
+    padding: 10px 16px;
+    border: 1px solid rgba(96, 165, 250, 0.48);
+    border-radius: 999px;
+    background: rgba(29, 78, 216, 0.10);
+  }
+
+  /* SHARED */
+  .container {
+    width: min(1180px, calc(100% - 48px));
     margin: 0 auto;
-    gap: 4rem;
   }
 
-  .hero-left { flex: 1.1; }
-  .hero-right { flex: 1; display: flex; justify-content: center; }
+  section {
+    padding: 96px 0;
+  }
 
-  .eyebrow {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.85rem;
-    color: var(--cyan);
-    margin-bottom: 1rem;
+  .section-head {
     display: flex;
-    align-items: center;
-    gap: 0.6rem;
+    justify-content: space-between;
+    gap: 28px;
+    align-items: end;
+    margin-bottom: 34px;
   }
-  .eyebrow .pulse {
-    width: 8px; height: 8px; border-radius: 50%;
-    background: var(--cyan);
-    box-shadow: 0 0 0 0 rgba(91,224,216,0.6);
+
+  .section-kicker {
+    font-family: "JetBrains Mono", monospace;
+    color: var(--primary-3);
+    font-size: 0.82rem;
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+
+  .section-title {
+    font-size: clamp(2rem, 4vw, 3rem);
+    letter-spacing: -0.055em;
+    line-height: 1;
+  }
+
+  .section-desc {
+    color: var(--muted);
+    max-width: 460px;
+    font-size: 0.98rem;
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.75s ease, transform 0.75s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  .glass {
+    background: rgba(6, 16, 32, 0.86);
+    border: 1px solid rgba(120, 165, 230, 0.20);
+    border-radius: var(--radius);
+    box-shadow:
+      var(--shadow),
+      inset 0 0 0 1px rgba(255, 255, 255, 0.025);
+    backdrop-filter: blur(18px);
+  }
+
+  .hover-card {
+    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  .hover-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(96, 165, 250, 0.55);
+    box-shadow:
+      var(--shadow),
+      0 0 34px rgba(37, 99, 235, 0.18),
+      inset 0 0 0 1px rgba(147, 197, 253, 0.08);
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    padding: 13px 18px;
+    min-height: 48px;
+    border-radius: 13px;
+    text-decoration: none;
+    font-weight: 800;
+    font-size: 0.95rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  }
+
+  .btn-primary {
+    background: linear-gradient(135deg, #1D4ED8, #2563EB);
+    color: white;
+    box-shadow: 0 16px 42px rgba(29, 78, 216, 0.20);
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 22px 54px rgba(29, 78, 216, 0.28);
+  }
+
+  .btn-secondary {
+    border: 1px solid rgba(120, 165, 230, 0.18);
+    color: var(--muted-2);
+    background: rgba(255,255,255,0.035);
+  }
+
+  .btn-secondary:hover {
+    transform: translateY(-3px);
+    border-color: var(--border-strong);
+    box-shadow: var(--glow);
+    color: var(--text);
+  }
+
+  /* HERO */
+  .hero {
+    min-height: calc(100vh - 72px);
+    display: grid;
+    grid-template-columns: 1.08fr 0.92fr;
+    gap: 54px;
+    align-items: center;
+    padding: 88px 0 72px;
+  }
+
+  .badge {
+    width: fit-content;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 13px;
+    border: 1px solid rgba(96, 165, 250, 0.38);
+    border-radius: 999px;
+    background: rgba(59, 130, 246, 0.09);
+    color: var(--primary-3);
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-bottom: 22px;
+  }
+
+  .status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    background: #22c55e;
+    box-shadow: 0 0 0 0 rgba(34,197,94,0.52);
     animation: pulse 2s infinite;
   }
+
   @keyframes pulse {
-    0% { box-shadow: 0 0 0 0 rgba(91,224,216,0.5); }
-    70% { box-shadow: 0 0 0 8px rgba(91,224,216,0); }
-    100% { box-shadow: 0 0 0 0 rgba(91,224,216,0); }
+    0% { box-shadow: 0 0 0 0 rgba(34,197,94,0.52); }
+    70% { box-shadow: 0 0 0 10px rgba(34,197,94,0); }
+    100% { box-shadow: 0 0 0 0 rgba(34,197,94,0); }
   }
 
   .hero h1 {
-    font-size: clamp(2.6rem, 6vw, 4.2rem);
-    font-weight: 700;
-    line-height: 1.1;
-    margin-bottom: 1.2rem;
+    font-size: clamp(3rem, 7vw, 6.2rem);
+    line-height: 0.95;
+    letter-spacing: -0.075em;
+    margin-bottom: 24px;
   }
-  .hero h1 .accent { color: var(--cyan); }
 
-  .hero-desc {
+  .gradient-text {
+    background: linear-gradient(135deg, #ffffff, #bfdbfe 48%, #2563EB);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .hero p {
+    max-width: 610px;
+    color: var(--muted-2);
+    font-size: 1.08rem;
+    line-height: 1.8;
+    margin-bottom: 28px;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin-bottom: 34px;
+  }
+
+  .metrics {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    max-width: 680px;
+    gap: 14px;
+  }
+
+  .metric {
+    padding: 18px;
+    border-radius: 18px;
+    border: 1px solid rgba(120, 165, 230, 0.18);
+    background: rgba(255,255,255,0.035);
+  }
+
+  .metric strong {
+    display: block;
+    font-size: 1.4rem;
+    letter-spacing: -0.04em;
+  }
+
+  .metric span {
     color: var(--muted);
-    font-size: 1.05rem;
-    max-width: 480px;
-    margin-bottom: 2.2rem;
+    font-size: 0.82rem;
+    font-family: "JetBrains Mono", monospace;
   }
 
-  .btn-row { display: flex; gap: 1rem; flex-wrap: wrap; }
-
-  .btn {
-    font-family: 'Space Grotesk', sans-serif;
-    font-weight: 600;
-    font-size: 0.95rem;
-    padding: 0.85rem 1.8rem;
-    border-radius: 10px;
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    border: 1px solid transparent;
-    transition: transform 0.15s, border-color 0.2s, background 0.2s;
-  }
-  .btn-primary {
-    background: var(--cyan);
-    color: #0B0D12;
-  }
-  .btn-primary:hover { transform: translateY(-2px); background: #7CEAE3; }
-  .btn-secondary {
-    background: transparent;
-    color: var(--text);
-    border-color: var(--border);
-  }
-  .btn-secondary:hover { border-color: var(--cyan); color: var(--cyan); transform: translateY(-2px); }
-
-  /* terminal card */
-  .terminal {
-    width: 100%;
-    max-width: 420px;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
+  .hero-panel {
+    position: relative;
+    padding: 18px;
+    min-height: 520px;
     overflow: hidden;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 0 0 1px rgba(91,224,216,0.05);
-    animation: terminalFloat 6s ease-in-out infinite;
   }
-  @keyframes terminalFloat {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
+
+  .hero-panel::before {
+    content: "";
+    position: absolute;
+    inset: -2px;
+    background:
+      radial-gradient(circle at 70% 10%, rgba(29,78,216,0.10), transparent 32%),
+      radial-gradient(circle at 0% 80%, rgba(37,99,235,0.08), transparent 28%);
+    pointer-events: none;
   }
+
+  .terminal {
+    position: relative;
+    border-radius: 18px;
+    overflow: hidden;
+    border: 1px solid rgba(148, 163, 184, 0.18);
+    background: rgba(1, 5, 14, 0.78);
+    box-shadow: 0 22px 60px rgba(2, 8, 23, 0.35);
+  }
+
   .terminal-bar {
     display: flex;
     align-items: center;
-    gap: 0.4rem;
-    padding: 0.8rem 1rem;
-    background: var(--surface-2);
-    border-bottom: 1px solid var(--border);
+    gap: 8px;
+    padding: 14px 16px;
+    border-bottom: 1px solid rgba(148, 163, 184, 0.16);
+    background: rgba(3, 9, 22, 0.86);
   }
-  .terminal-dot { width: 11px; height: 11px; border-radius: 50%; }
-  .terminal-bar .terminal-dot:nth-child(1) { background: #FF5F57; }
-  .terminal-bar .terminal-dot:nth-child(2) { background: #FEBC2E; }
-  .terminal-bar .terminal-dot:nth-child(3) { background: #28C840; }
+
+  .terminal-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 999px;
+    background: rgba(148, 163, 184, 0.5);
+  }
+
+  .terminal-dot:nth-child(1) { background: #ef4444; }
+  .terminal-dot:nth-child(2) { background: #f59e0b; }
+  .terminal-dot:nth-child(3) { background: #22c55e; }
+
   .terminal-title {
-    margin-left: 0.6rem;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.8rem;
+    margin-left: 8px;
     color: var(--muted);
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.78rem;
   }
-  .terminal-body {
-    padding: 1.4rem;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.85rem;
+
+  .terminal-code {
+    padding: 20px;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.86rem;
     line-height: 2;
+    color: var(--muted-2);
   }
-  .terminal-body .ln { color: var(--muted); display: inline-block; width: 1.5em; user-select: none; }
-  .t-purple { color: #C792EA; }
-  .t-cyan { color: var(--cyan); }
-  .t-string { color: #FFC857; }
-  .t-comment { color: #5C6478; font-style: italic; }
-  .t-func { color: #82AAFF; }
-  .cursor {
-    display: inline-block;
-    width: 8px; height: 1.1em;
-    background: var(--cyan);
-    vertical-align: text-bottom;
-    animation: blink 1s step-end infinite;
-  }
-  @keyframes blink { 50% { opacity: 0; } }
 
-  .hero-avatar {
-    width: 38px; height: 38px;
-    border-radius: 8px;
-    border: 1px solid var(--border);
-    overflow: hidden;
+  .line-no {
     display: inline-block;
-    vertical-align: middle;
-    margin-right: 0.6rem;
-  }
-  .hero-avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
-
-  /* ─── DIVIDER ─── */
-  .divider {
-    position: relative;
-    z-index: 1;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 3rem;
-    display: flex;
-    align-items: center;
-    gap: 1.2rem;
-    color: var(--muted);
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.8rem;
+    width: 24px;
+    color: rgba(148, 163, 184, 0.45);
     user-select: none;
   }
-  .divider-line {
-    flex: 1;
-    height: 1px;
-    background: var(--border);
-    position: relative;
-    overflow: hidden;
-  }
-  .divider-line::after {
-    content: '';
+
+  .kw { color: #c084fc; }
+  .key { color: #7dd3fc; }
+  .str { color: #bfdbfe; }
+  .cm { color: #64748b; font-style: italic; }
+  .fn { color: #93c5fd; }
+
+  .floating-card {
     position: absolute;
-    top: 0; bottom: 0;
-    width: 30%;
-    background: linear-gradient(90deg, transparent, var(--cyan), transparent);
-    opacity: 0.7;
-    animation: dividerSlide 6s ease-in-out infinite;
-  }
-  .divider-line.right::after { animation-delay: 3s; }
-  @keyframes dividerSlide {
-    0% { left: -40%; }
-    100% { left: 110%; }
-  }
-  .divider-symbol {
-    flex-shrink: 0;
-    color: var(--border);
-    transition: color 0.3s, transform 0.4s;
-  }
-  .divider:hover .divider-symbol {
-    color: var(--cyan);
-    transform: rotate(90deg);
+    right: 30px;
+    bottom: 36px;
+    width: min(330px, calc(100% - 60px));
+    padding: 20px;
+    border-radius: 20px;
+    border: 1px solid rgba(96, 165, 250, 0.26);
+    background: rgba(4, 12, 26, 0.90);
+    backdrop-filter: blur(18px);
+    box-shadow: 0 28px 80px rgba(0, 0, 0, 0.62), 0 0 28px rgba(29, 78, 216, 0.10);
+    animation: cardFloat 5.5s ease-in-out infinite;
   }
 
-  /* ─── SECTION SHARED ─── */
-  section { position: relative; z-index: 1; padding: 6rem 3rem; max-width: 1200px; margin: 0 auto; }
+  @keyframes cardFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+  }
 
-  .section-head { margin-bottom: 3rem; }
-  .section-tag {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.85rem;
-    color: var(--cyan);
-    margin-bottom: 0.6rem;
-    position: relative;
+  .floating-card small {
     display: block;
-  }
-  .section-title {
-    font-size: clamp(1.8rem, 4vw, 2.6rem);
-    font-weight: 700;
-    position: relative;
-    display: inline-block;
-  }
-  .section-title::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: -8px;
-    width: 0;
-    height: 2px;
-    background: var(--cyan);
-    transition: width 0.6s ease;
-  }
-  .section-head.visible .section-title::after,
-  .reveal.visible .section-title::after {
-    width: 48px;
+    color: var(--primary-3);
+    font-family: "JetBrains Mono", monospace;
+    margin-bottom: 8px;
   }
 
-  /* ─── ABOUT ─── */
+  .floating-card h3 {
+    font-size: 1.15rem;
+    margin-bottom: 8px;
+    letter-spacing: -0.03em;
+  }
+
+  .floating-card p {
+    color: var(--muted);
+    font-size: 0.9rem;
+    line-height: 1.7;
+  }
+
+  /* ABOUT */
   .about-grid {
     display: grid;
-    grid-template-columns: 1.3fr 1fr;
-    gap: 2rem;
-    align-items: stretch;
+    grid-template-columns: 1.35fr 0.65fr;
+    gap: 22px;
   }
 
   .about-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 2.2rem;
-    transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
-  }
-  .about-card:hover {
-    border-color: var(--cyan);
-    box-shadow: 0 0 0 1px rgba(91,224,216,0.1), 0 12px 40px rgba(91,224,216,0.08);
-    transform: translateY(-3px);
+    padding: 32px;
   }
 
-  .about-card p { color: var(--muted); font-size: 1.02rem; }
+  .about-card p {
+    color: var(--muted-2);
+    font-size: 1.04rem;
+    line-height: 1.85;
+  }
 
-  .stats-grid {
+  .profile-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 18px;
+  }
+
+  .avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 15px;
+    border: 1px solid rgba(96, 165, 250, 0.38);
+    background: linear-gradient(135deg, rgba(59,130,246,0.34), rgba(34,211,238,0.22));
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.2rem;
+    place-items: center;
+    font-weight: 900;
+    box-shadow: 0 0 28px rgba(59, 130, 246, 0.18);
   }
 
-  .stat-chip {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 1.6rem;
-    transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
-  }
-  .stat-chip:hover {
-    border-color: var(--cyan);
-    transform: translateY(-3px);
-    box-shadow: 0 12px 32px rgba(91,224,216,0.1);
+  .profile-row h3 {
+    font-size: 1.2rem;
+    letter-spacing: -0.035em;
   }
 
-  .stat-num {
-    font-family: 'Space Grotesk', sans-serif;
-    font-weight: 700;
-    font-size: 1.8rem;
-    color: var(--cyan);
-    margin-bottom: 0.3rem;
-    transition: transform 0.2s;
-  }
-  .stat-chip:hover .stat-num { transform: scale(1.08); }
-  .stat-label {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.75rem;
+  .profile-row span {
     color: var(--muted);
-    text-transform: uppercase;
-    letter-spacing: 1px;
+    font-size: 0.9rem;
   }
 
-  /* ─── SKILLS ─── */
+  .info-list {
+    display: grid;
+    gap: 14px;
+  }
+
+  .info-item {
+    padding: 20px;
+    border-radius: 18px;
+    border: 1px solid rgba(120, 165, 230, 0.18);
+    background: rgba(255,255,255,0.035);
+  }
+
+  .info-item strong {
+    display: block;
+    font-size: 1.5rem;
+    letter-spacing: -0.05em;
+    margin-bottom: 5px;
+  }
+
+  .info-item span {
+    color: var(--muted);
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.78rem;
+  }
+
+  /* SKILLS */
   .skills-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1.2rem;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
   }
 
   .skill-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 1.6rem;
-    transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
-  }
-  .skill-card:hover {
-    transform: translateY(-4px);
-    border-color: var(--cyan);
-    box-shadow: 0 14px 36px rgba(91,224,216,0.1);
-  }
-
-  .skill-top {
-    display: flex;
-    align-items: center;
-    gap: 0.8rem;
-    margin-bottom: 0.6rem;
-  }
-
-  .skill-num {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.75rem;
-    color: var(--muted);
-    background: var(--surface-2);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    padding: 0.2rem 0.5rem;
-    transition: color 0.25s, border-color 0.25s, transform 0.25s;
-  }
-  .skill-card:hover .skill-num {
-    color: var(--cyan);
-    border-color: var(--cyan);
-    transform: rotate(-6deg);
-  }
-
-  .skill-card h4 { font-size: 1.05rem; font-weight: 600; }
-
-  .skill-card p { color: var(--muted); font-size: 0.88rem; margin: 0.5rem 0 0.9rem; }
-
-  .skill-bar {
-    height: 6px;
-    background: var(--surface-2);
-    border-radius: 3px;
+    padding: 24px;
+    position: relative;
     overflow: hidden;
   }
 
-  .skill-fill {
-    height: 100%;
-    border-radius: 3px;
-    transition: width 1.2s cubic-bezier(.4,0,.2,1);
-    background: var(--cyan);
+  .skill-card::before {
+    content: "";
+    position: absolute;
+    inset: auto -30px -50px auto;
+    width: 160px;
+    height: 160px;
+    background: radial-gradient(circle, rgba(59, 130, 246, 0.18), transparent 70%);
+    opacity: 0;
+    transition: opacity 0.25s;
   }
-  .skill-card:nth-child(2) .skill-fill { background: var(--magenta); }
-  .skill-card:nth-child(3) .skill-fill { background: var(--amber); }
-  .skill-card:nth-child(4) .skill-fill { background: var(--cyan); }
-  .skill-card:nth-child(5) .skill-fill { background: var(--magenta); }
-  .skill-card:nth-child(6) .skill-fill { background: var(--amber); }
 
-  /* ─── PROJECTS ─── */
-  .projects-grid {
+  .skill-card:hover::before {
+    opacity: 1;
+  }
+
+  .skill-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 13px;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 1.5rem;
+    place-items: center;
+    background: rgba(29, 78, 216, 0.10);
+    border: 1px solid rgba(96, 165, 250, 0.36);
+    margin-bottom: 18px;
+    box-shadow: 0 0 18px rgba(29, 78, 216, 0.09);
   }
 
-  .project-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    overflow: hidden;
-    transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
-  }
-  .project-card:hover {
-    transform: translateY(-4px);
-    border-color: var(--cyan);
-    box-shadow: 0 16px 40px rgba(91,224,216,0.1);
+  .skill-card h3 {
+    font-size: 1.08rem;
+    letter-spacing: -0.035em;
+    margin-bottom: 9px;
   }
 
-  .project-video {
-    width: 100%;
-    aspect-ratio: 16/9;
-    border: none;
-    display: block;
-    border-bottom: 1px solid var(--border);
-    transition: filter 0.3s;
-  }
-  .project-card:hover .project-video { filter: brightness(1.05) saturate(1.1); }
-
-  .project-body { padding: 1.2rem 1.4rem; }
-
-  .project-body h3 { font-size: 1.05rem; font-weight: 600; transition: color 0.2s; }
-  .project-card:hover .project-body h3 { color: var(--cyan); }
-
-  .project-body .proj-tag {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.75rem;
+  .skill-card p {
     color: var(--muted);
-    margin-top: 0.4rem;
-    display: block;
+    font-size: 0.93rem;
+    line-height: 1.7;
   }
 
-
-  .work-tabs {
-    display: inline-flex;
-    gap: 0.5rem;
-    padding: 0.45rem;
-    background: rgba(255,255,255,0.03);
-    border: 1px solid var(--border);
+  /* WORK */
+  .tabs {
+    display: flex;
+    gap: 10px;
+    width: fit-content;
+    padding: 7px;
+    border: 1px solid rgba(120, 165, 230, 0.18);
+    background: rgba(255,255,255,0.035);
     border-radius: 999px;
-    margin-bottom: 1.6rem;
+    margin-bottom: 24px;
   }
 
-  .work-tab {
-    font-family: 'Space Grotesk', sans-serif;
-    font-weight: 700;
-    font-size: 0.9rem;
-    padding: 0.75rem 1.25rem;
-    border: 1px solid transparent;
-    border-radius: 999px;
+  .tab {
+    border: 0;
+    color: var(--muted-2);
     background: transparent;
-    color: var(--muted);
+    padding: 12px 16px;
+    border-radius: 999px;
+    font-weight: 800;
     cursor: pointer;
-    transition: background 0.2s, color 0.2s, border-color 0.2s, transform 0.2s;
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s;
   }
 
-  .work-tab:hover {
-    color: var(--text);
-    border-color: var(--border);
-    transform: translateY(-1px);
+  .tab.active {
+    color: white;
+    background: linear-gradient(135deg, #1D4ED8, #2563EB);
+    box-shadow: 0 14px 34px rgba(59, 130, 246, 0.25);
   }
 
-  .work-tab.active {
-    background: var(--cyan);
-    color: #0B0D12;
-    box-shadow: 0 10px 28px rgba(91,224,216,0.18);
-  }
+  .panel { display: none; }
+  .panel.active { display: block; }
 
-  .work-panel { display: none; }
-  .work-panel.active { display: block; }
-
+  .projects-grid,
   .games-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-    gap: 1.5rem;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
   }
 
+  .project-card,
   .game-card {
-    background: linear-gradient(180deg, rgba(255,255,255,0.035), rgba(255,255,255,0.015)), var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
     overflow: hidden;
-    transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
   }
 
-  .game-card:hover {
-    transform: translateY(-4px);
-    border-color: var(--cyan);
-    box-shadow: 0 16px 44px rgba(91,224,216,0.11);
-  }
-
+  .project-video,
   .game-thumb {
     width: 100%;
     aspect-ratio: 16 / 9;
-    object-fit: cover;
+    border: 0;
     display: block;
-    background: var(--surface-2);
-    border-bottom: 1px solid var(--border);
-  }
-
-  .thumb-placeholder {
-    width: 100%;
-    aspect-ratio: 16 / 9;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    object-fit: cover;
     background:
-      radial-gradient(circle at 30% 20%, rgba(91,224,216,0.16), transparent 32%),
-      radial-gradient(circle at 80% 65%, rgba(255,92,138,0.14), transparent 34%),
-      var(--surface-2);
-    color: var(--muted);
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.8rem;
+      radial-gradient(circle at 30% 20%, rgba(29,78,216,0.12), transparent 30%),
+      radial-gradient(circle at 80% 70%, rgba(37,99,235,0.08), transparent 35%),
+      rgba(3, 9, 22, 0.92);
     border-bottom: 1px solid var(--border);
   }
 
-  .game-body { padding: 1.35rem 1.45rem 1.5rem; }
-
-  .game-meta {
-    display: inline-block;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.72rem;
-    color: var(--cyan);
-    margin-bottom: 0.55rem;
+  .project-body,
+  .game-body {
+    padding: 22px;
   }
 
+  .project-body h3,
   .game-body h3 {
-    font-size: 1.2rem;
-    margin-bottom: 0.55rem;
+    font-size: 1.08rem;
+    letter-spacing: -0.035em;
+    margin-bottom: 8px;
   }
 
-  .game-desc {
+  .tag {
+    display: inline-flex;
+    width: fit-content;
+    font-family: "JetBrains Mono", monospace;
+    color: var(--primary-3);
+    font-size: 0.74rem;
+    margin-bottom: 12px;
+  }
+
+  .game-body p {
     color: var(--muted);
     font-size: 0.93rem;
-    margin-bottom: 1.1rem;
+    line-height: 1.7;
+    margin-bottom: 16px;
   }
 
-  .game-actions { display: flex; gap: 0.7rem; flex-wrap: wrap; }
-
-  .mini-btn {
-    font-family: 'Space Grotesk', sans-serif;
-    font-weight: 700;
-    font-size: 0.85rem;
-    padding: 0.65rem 1rem;
-    border-radius: 9px;
+  .mini-link {
+    display: inline-flex;
     text-decoration: none;
-    border: 1px solid var(--border);
     color: var(--text);
-    transition: transform 0.15s, border-color 0.2s, color 0.2s, background 0.2s;
+    font-weight: 800;
+    font-size: 0.9rem;
+    padding: 10px 14px;
+    border-radius: 12px;
+    background: rgba(29, 78, 216, 0.12);
+    border: 1px solid rgba(96, 165, 250, 0.38);
+    transition: transform 0.2s, box-shadow 0.2s;
   }
 
-  .mini-btn:hover { transform: translateY(-2px); border-color: var(--cyan); color: var(--cyan); }
-  .mini-btn.primary { background: var(--cyan); color: #0B0D12; border-color: var(--cyan); }
-  .mini-btn.primary:hover { background: #7CEAE3; color: #0B0D12; }
+  .mini-link:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--glow);
+  }
 
-
-
-  .project-card.hidden-showcase {
+  .hidden-showcase {
     display: none;
   }
 
-  .showcase-actions {
+  .center-action {
     display: flex;
     justify-content: center;
-    margin-top: 1.8rem;
+    margin-top: 26px;
   }
 
   .showcase-toggle {
-    font-family: 'Space Grotesk', sans-serif;
-    font-weight: 700;
-    font-size: 0.95rem;
-    padding: 0.85rem 1.7rem;
-    border-radius: 10px;
-    border: 1px solid var(--border);
-    background: var(--surface);
+    border: 1px solid rgba(120, 165, 230, 0.18);
+    background: rgba(255,255,255,0.04);
     color: var(--text);
+    font-weight: 800;
+    border-radius: 13px;
+    padding: 13px 18px;
     cursor: pointer;
-    transition: transform 0.15s, border-color 0.2s, color 0.2s, background 0.2s;
+    transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
   }
 
   .showcase-toggle:hover {
-    transform: translateY(-2px);
-    border-color: var(--cyan);
-    color: var(--cyan);
+    transform: translateY(-3px);
+    border-color: var(--border-strong);
+    box-shadow: var(--glow);
   }
 
+  /* AVAILABILITY */
   .availability-grid {
     display: grid;
-    grid-template-columns: 1.1fr 0.9fr;
-    gap: 1.5rem;
-    align-items: stretch;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
   }
 
   .availability-card {
-    background: linear-gradient(180deg, rgba(91,224,216,0.055), rgba(255,255,255,0.015)), var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 2rem;
-    transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
+    padding: 30px;
   }
 
-  .availability-card:hover {
-    transform: translateY(-3px);
-    border-color: var(--cyan);
-    box-shadow: 0 14px 36px rgba(91,224,216,0.1);
-  }
-
-  .availability-status {
+  .pill {
     display: inline-flex;
     align-items: center;
-    gap: 0.55rem;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.8rem;
-    color: var(--cyan);
-    background: rgba(91,224,216,0.08);
-    border: 1px solid rgba(91,224,216,0.22);
+    gap: 9px;
+    color: var(--primary-3);
+    border: 1px solid rgba(96, 165, 250, 0.36);
+    background: rgba(29, 78, 216, 0.10);
     border-radius: 999px;
-    padding: 0.45rem 0.75rem;
-    margin-bottom: 1rem;
-  }
-
-  .availability-status span {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: var(--cyan);
-    box-shadow: 0 0 0 0 rgba(91,224,216,0.55);
-    animation: pulse 2s infinite;
+    padding: 8px 12px;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.78rem;
+    margin-bottom: 18px;
   }
 
   .availability-card h3 {
-    font-size: 1.35rem;
-    margin-bottom: 0.65rem;
+    font-size: 1.45rem;
+    letter-spacing: -0.045em;
+    margin-bottom: 12px;
   }
 
   .availability-card p {
-    color: var(--muted);
-    font-size: 0.96rem;
+    color: var(--muted-2);
+    line-height: 1.8;
   }
 
-  .availability-list {
-    list-style: none;
+  .list {
     display: grid;
-    gap: 0.75rem;
-    margin-top: 1.2rem;
+    gap: 10px;
+    margin-top: 20px;
+    list-style: none;
   }
 
-  .availability-list li {
+  .list li {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 1rem;
-    padding: 0.9rem 1rem;
-    background: var(--surface-2);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    color: var(--text);
-    font-size: 0.92rem;
+    gap: 14px;
+    padding: 14px 15px;
+    border-radius: 14px;
+    border: 1px solid rgba(120, 165, 230, 0.18);
+    background: rgba(255,255,255,0.035);
+    color: var(--muted-2);
   }
 
-  .availability-list strong {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.76rem;
-    color: var(--cyan);
+  .list strong {
+    color: var(--primary-3);
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.78rem;
     white-space: nowrap;
   }
 
-  /* ─── PRICING ─── */
+  /* PRICING CONTACT */
   .pricing-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 1.5rem;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
   }
 
   .price-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 2rem;
-    transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
-  }
-  .price-card:hover {
-    border-color: var(--cyan);
-    transform: translateY(-3px);
-    box-shadow: 0 14px 36px rgba(91,224,216,0.08);
+    padding: 30px;
   }
 
-  .price-card h3 { font-size: 1.2rem; font-weight: 600; margin-bottom: 0.8rem; }
-  .price-card p { color: var(--muted); font-size: 0.95rem; }
-  .price-card .note {
-    margin-top: 1rem;
-    padding: 0.8rem 1rem;
-    background: var(--surface-2);
-    border-radius: 8px;
-    border-left: 2px solid var(--cyan);
-    font-size: 0.85rem;
-    color: var(--text);
-    transition: border-left-width 0.2s, padding-left 0.2s;
-  }
-  .price-card:hover .note { border-left-width: 4px; padding-left: 0.85rem; }
-
-  .payment-methods { list-style: none; margin-top: 0.5rem; }
-  .payment-methods li {
-    display: flex;
-    align-items: center;
-    gap: 0.8rem;
-    padding: 0.85rem 1rem;
-    background: var(--surface-2);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    margin-bottom: 0.6rem;
-    font-weight: 500;
-    font-size: 0.95rem;
-    transition: border-color 0.2s, transform 0.2s;
-  }
-  .payment-methods li:hover {
-    border-color: var(--cyan);
-    transform: translateX(4px);
+  .price-card h3 {
+    font-size: 1.35rem;
+    letter-spacing: -0.04em;
+    margin-bottom: 12px;
   }
 
-  /* ─── CONTACT ─── */
-  .contact { text-align: center; }
+  .price-card p {
+    color: var(--muted-2);
+    line-height: 1.8;
+  }
 
-  .discord-box {
-    max-width: 540px;
-    margin: 0 auto;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 3rem 2.5rem;
+  .note {
+    margin-top: 18px;
+    padding: 15px 16px;
+    border-radius: 14px;
+    background: rgba(29, 78, 216, 0.08);
+    border: 1px solid rgba(96, 165, 250, 0.34);
+    color: var(--muted-2);
+  }
+
+  .payment-list {
+    list-style: none;
+    display: grid;
+    gap: 12px;
+  }
+
+  .payment-list li {
+    padding: 16px;
+    border-radius: 15px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(120, 165, 230, 0.18);
+    font-weight: 800;
+  }
+
+  .contact-box {
+    text-align: center;
+    padding: 48px 28px;
     position: relative;
     overflow: hidden;
-    transition: border-color 0.3s, transform 0.3s;
   }
-  .discord-box:hover { border-color: var(--cyan); transform: translateY(-3px); }
-  .discord-box::before {
-    content: '';
+
+  .contact-box::before {
+    content: "";
     position: absolute;
-    top: -50%; left: -20%;
-    width: 300px; height: 300px;
-    background: radial-gradient(circle, rgba(91,224,216,0.12), transparent 70%);
+    inset: -80px;
+    background:
+      radial-gradient(circle at 50% 0%, rgba(29, 78, 216, 0.10), transparent 35%),
+      radial-gradient(circle at 20% 80%, rgba(37, 99, 235, 0.06), transparent 30%);
     pointer-events: none;
-    animation: glowDrift 10s ease-in-out infinite;
-  }
-  @keyframes glowDrift {
-    0%, 100% { transform: translate(0, 0); }
-    50% { transform: translate(40px, 30px); }
   }
 
-  .discord-box h3 { font-size: 1.5rem; font-weight: 700; margin-bottom: 0.8rem; }
-  .discord-box p { color: var(--muted); margin-bottom: 1.8rem; }
-
-  .btn-discord {
-    font-family: 'Space Grotesk', sans-serif;
-    font-weight: 600;
-    font-size: 1rem;
-    padding: 0.9rem 2.4rem;
-    border-radius: 10px;
-    background: #5865F2;
-    color: #fff;
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.6rem;
-    transition: transform 0.15s, background 0.2s;
-  }
-  .btn-discord:hover { transform: translateY(-2px); background: #4752C4; }
-
-  /* ─── FOOTER ─── */
-  footer {
-    border-top: 1px solid var(--border);
-    text-align: center;
-    padding: 2rem;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.85rem;
-    color: var(--muted);
+  .contact-box > * {
     position: relative;
-    z-index: 1;
   }
 
-  /* ─── SCROLL REVEAL ─── */
-  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s, transform 0.6s; }
-  .reveal.visible { opacity: 1; transform: none; }
+  .contact-box h2 {
+    font-size: clamp(2.2rem, 5vw, 4rem);
+    line-height: 1;
+    letter-spacing: -0.07em;
+    margin-bottom: 16px;
+  }
 
-  /* ─── RESPONSIVE ─── */
-  @media (max-width: 900px) {
-    .hero { flex-direction: column; text-align: left; padding-top: 3rem; }
-    .about-grid { grid-template-columns: 1fr; }
+  .contact-box p {
+    max-width: 560px;
+    margin: 0 auto 24px;
+    color: var(--muted-2);
+    line-height: 1.8;
+  }
+
+  footer {
+    padding: 32px 0 52px;
+    color: var(--muted);
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.82rem;
+    text-align: center;
+  }
+
+  @media (max-width: 980px) {
+    .hero,
+    .about-grid,
+    .availability-grid,
+    .pricing-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .hero-panel {
+      min-height: 460px;
+    }
+
+    .skills-grid,
+    .projects-grid,
+    .games-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .section-head {
+      align-items: start;
+      flex-direction: column;
+    }
   }
 
   @media (max-width: 700px) {
-    nav { padding: 1rem 1.2rem; }
-    .nav-links { gap: 1rem; }
-    .nav-links a span { display: none; }
-    section { padding: 4rem 1.2rem; }
-    .stats-grid { grid-template-columns: 1fr; }
-    .work-tabs { width: 100%; display: flex; }
-    .work-tab { flex: 1; padding: 0.7rem 0.8rem; }
-    .games-grid { grid-template-columns: 1fr; }
-    .availability-grid { grid-template-columns: 1fr; }
+    .container {
+      width: min(100% - 28px, 1180px);
+    }
+
+    .nav-wrap {
+      padding: 10px 10px 0;
+    }
+
+    nav {
+      border-radius: 16px;
+    }
+
+    .nav-links a:not(.nav-cta) {
+      display: none;
+    }
+
+    .hero {
+      padding-top: 64px;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.85rem, 16vw, 4.4rem);
+    }
+
+    .metrics,
+    .skills-grid,
+    .projects-grid,
+    .games-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .tabs {
+      width: 100%;
+    }
+
+    .tab {
+      flex: 1;
+      padding-inline: 10px;
+    }
+
+    section {
+      padding: 72px 0;
+    }
+
+    .floating-card {
+      left: 20px;
+      right: 20px;
+      width: auto;
+    }
   }
 </style>
 </head>
+
 <body>
+  <div class="blob one"></div>
+  <div class="blob two"></div>
 
-<nav>
-  <div class="nav-logo"><span class="dot">▍</span>Qelp</div>
-  <div class="nav-links">
-    <a href="#about">about</a>
-    <a href="#skills">skills</a>
-    <a href="#projects">work</a>
-    <a href="#availability">availability</a>
-    <a href="#pricing">pricing</a>
-    <a href="#contact">contact</a>
-  </div>
-</nav>
+  <div class="page">
+    <div class="nav-wrap">
+      <nav>
+        <a href="#home" class="brand">
+          <span class="brand-mark">Q</span>
+          <span>Qelp</span>
+        </a>
 
-<div class="particle" style="width:6px;height:6px;background:var(--cyan);top:18%;left:8%;animation-duration:14s;"></div>
-<div class="particle" style="width:4px;height:4px;background:var(--magenta);top:35%;left:88%;animation-duration:18s;animation-delay:2s;"></div>
-<div class="particle" style="width:8px;height:8px;background:var(--amber);top:65%;left:12%;animation-duration:16s;animation-delay:4s;"></div>
-<div class="particle" style="width:5px;height:5px;background:var(--cyan);top:80%;left:75%;animation-duration:20s;animation-delay:1s;"></div>
-<div class="particle" style="width:3px;height:3px;background:var(--magenta);top:50%;left:50%;animation-duration:22s;animation-delay:6s;"></div>
-
-<section class="hero" id="home">
-  <div class="hero-left">
-    <div class="eyebrow"><span class="pulse"></span>available for new projects</div>
-    <h1>Building game systems<br>that hold up <span class="accent">under load.</span></h1>
-    <p class="hero-desc">I'm Qelp — a Roblox scripter and systems designer writing clean, optimized, and secure Luau code for immersive gameplay mechanics.</p>
-    <div class="btn-row">
-      <a href="#projects" class="btn btn-primary">View my work</a>
-      <a href="#contact" class="btn btn-secondary">Get in touch</a>
-    </div>
-  </div>
-  <div class="hero-right">
-    <div class="terminal">
-      <div class="terminal-bar">
-        <div class="terminal-dot"></div>
-        <div class="terminal-dot"></div>
-        <div class="terminal-dot"></div>
-        <span class="terminal-title">profile.luau</span>
-      </div>
-      <div class="terminal-body">
-        <div><span class="ln">1</span><span class="t-purple">local</span> dev = {}</div>
-        <div><span class="ln">2</span></div>
-        <div><span class="ln">3</span>dev.<span class="t-cyan">name</span> = <span class="t-string">"Qelp"</span></div>
-        <div><span class="ln">4</span>dev.<span class="t-cyan">role</span> = <span class="t-string">"Scripter & Systems Designer"</span></div>
-        <div><span class="ln">5</span>dev.<span class="t-cyan">timezone</span> = <span class="t-string">"UTC+3"</span></div>
-        <div><span class="ln">6</span>dev.<span class="t-cyan">experience</span> = <span class="t-string">"2+ years"</span></div>
-        <div><span class="ln">7</span></div>
-        <div><span class="ln">8</span><span class="t-comment">-- always shipping</span></div>
-        <div><span class="ln">9</span><span class="t-purple">return</span> dev<span class="cursor"></span></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="divider"><span class="divider-line"></span><span class="divider-symbol">◆</span><span class="divider-line right"></span></div>
-
-<section id="about">
-  <div class="section-head reveal">
-    <span class="section-tag">// 01 — about</span>
-    <h2 class="section-title">Who I am</h2>
-  </div>
-  <div class="about-grid">
-    <div class="about-card reveal">
-      <div style="margin-bottom: 1rem;"><span class="hero-avatar"><img src="Profile.png" alt="Qelp avatar"></span><strong>Qelp</strong></div>
-      <p>A passionate Roblox developer specialized in gameplay programming, backend database systems, and modular framework development. I focus on writing robust, expandable code that keeps game servers running smooth and player data perfectly safe.</p>
-    </div>
-    <div class="stats-grid reveal">
-      <div class="stat-chip">
-        <div class="stat-num">2+ yrs</div>
-        <div class="stat-label">Experience</div>
-      </div>
-      <div class="stat-chip">
-        <div class="stat-num">UTC+3</div>
-        <div class="stat-label">Timezone</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="divider"><span class="divider-line"></span><span class="divider-symbol">◆</span><span class="divider-line right"></span></div>
-
-<section id="skills">
-  <div class="section-head reveal">
-    <span class="section-tag">// 02 — skills</span>
-    <h2 class="section-title">What I work with</h2>
-  </div>
-  <div class="skills-grid">
-    <div class="skill-card reveal">
-      <div class="skill-top"><span class="skill-num">01</span><h4>Modular Structure</h4></div>
-      <p>Clean & OOP codebases</p>
-      <div class="skill-bar"><div class="skill-fill" style="width:100%"></div></div>
-    </div>
-    <div class="skill-card reveal">
-      <div class="skill-top"><span class="skill-num">02</span><h4>Server-Client Comm.</h4></div>
-      <p>Clean networking</p>
-      <div class="skill-bar"><div class="skill-fill" style="width:100%"></div></div>
-    </div>
-    <div class="skill-card reveal">
-      <div class="skill-top"><span class="skill-num">03</span><h4>Well Optimized Scripts</h4></div>
-      <p>High performance, low lag</p>
-      <div class="skill-bar"><div class="skill-fill" style="width:100%"></div></div>
-    </div>
-    <div class="skill-card reveal">
-      <div class="skill-top"><span class="skill-num">04</span><h4>Data Saving (ProfileStore)</h4></div>
-      <p>Session locking & data safety</p>
-      <div class="skill-bar"><div class="skill-fill" style="width:100%"></div></div>
-    </div>
-    <div class="skill-card reveal">
-      <div class="skill-top"><span class="skill-num">05</span><h4>UI Scripting & Tweens</h4></div>
-      <p>Smooth & responsive layouts</p>
-      <div class="skill-bar"><div class="skill-fill" style="width:100%"></div></div>
-    </div>
-    <div class="skill-card reveal">
-      <div class="skill-top"><span class="skill-num">06</span><h4>Monetization Systems</h4></div>
-      <p>Gamepasses, products & shops</p>
-      <div class="skill-bar"><div class="skill-fill" style="width:100%"></div></div>
-    </div>
-  </div>
-</section>
-
-<div class="divider"><span class="divider-line"></span><span class="divider-symbol">◆</span><span class="divider-line right"></span></div>
-
-<section id="projects">
-  <div class="section-head reveal">
-    <span class="section-tag">// 03 — work</span>
-    <h2 class="section-title">Selected work</h2>
-  </div>
-
-  <div class="work-tabs reveal">
-    <button class="work-tab active" type="button" data-work-tab="showcases">Video Showcases</button>
-    <button class="work-tab" type="button" data-work-tab="games">Games I Worked On</button>
-  </div>
-
-  <div class="work-panel active" data-work-panel="showcases">
-    <div class="projects-grid">
-      <div class="project-card reveal">
-        <iframe class="project-video" src="https://www.youtube.com/embed/DQknjgCaorI" allowfullscreen></iframe>
-        <div class="project-body">
-          <h3>Advanced Placement System</h3>
-          <span class="proj-tag">building / placement logic</span>
+        <div class="nav-links">
+          <a href="#about">About</a>
+          <a href="#skills">Skills</a>
+          <a href="#work">Work</a>
+          <a href="#pricing">Pricing</a>
+          <a href="#contact" class="nav-cta">Contact</a>
         </div>
-      </div>
-      <div class="project-card reveal">
-        <iframe class="project-video" src="https://www.youtube.com/embed/-E85ac_U5mo" allowfullscreen></iframe>
-        <div class="project-body">
-          <h3>Basic Use Of PathfindingService</h3>
-          <span class="proj-tag">npc navigation</span>
-        </div>
-      </div>
-      <div class="project-card reveal">
-        <iframe class="project-video" src="https://www.youtube.com/embed/t8o7YoU2Wr8" allowfullscreen></iframe>
-        <div class="project-body">
-          <h3>Highly Scalable Gun System</h3>
-          <span class="proj-tag">combat / weapons</span>
-        </div>
-      </div>
-      <div class="project-card reveal">
-        <iframe class="project-video" src="https://www.youtube.com/embed/9N7pt1LUl04" allowfullscreen></iframe>
-        <div class="project-body">
-          <h3>Party Teleport System</h3>
-          <span class="proj-tag">multiplayer / teleportation</span>
-        </div>
-      </div>
-      <div class="project-card reveal">
-        <iframe class="project-video" src="https://www.youtube.com/embed/vlUrQxvljx8" allowfullscreen></iframe>
-        <div class="project-body">
-          <h3>Simple Round System</h3>
-          <span class="proj-tag">game state / rounds</span>
-        </div>
-      </div>
-      <div class="project-card reveal">
-        <iframe class="project-video" src="https://www.youtube.com/embed/JEyb5fbO0Wk" allowfullscreen></iframe>
-        <div class="project-body">
-          <h3>Basic Rng Purchase System</h3>
-          <span class="proj-tag">npc / trading logic</span>
-        </div>
-      </div>
+      </nav>
     </div>
 
-    <div class="showcase-actions reveal">
-      <button class="showcase-toggle" type="button" id="showcaseToggle">Show All</button>
-    </div>
-  </div>
+    <main>
+      <section class="hero container" id="home">
+        <div class="hero-copy reveal">
+          <div class="badge"><span class="status-dot"></span>Available for Roblox development</div>
 
-  <div class="work-panel" data-work-panel="games">
-    <div class="games-grid">
-      <article class="game-card reveal">
-        <img src="thumb.png" class="game-thumb" alt="Be A Dealer For Brainrots thumbnail">
-        <div class="game-body">
-          <span class="game-meta">Roblox experience / economy & trading</span>
-          <h3>Be A Dealer For Brainrots</h3>
-          <p class="game-desc">A chaotic trading and collection experience where players buy, sell, and upgrade bizarre brainrot creatures while growing from a small dealer into a top-tier marketplace boss.</p>
-          <div class="game-actions">
-            <a class="mini-btn primary" href="https://www.roblox.com/games/114812891420300/Be-A-Dealer-For-Brainrots" target="_blank">View Game</a>
+          <h1>
+            Building scalable
+            <span class="gradient-text">Roblox systems</span>
+            for modern games.
+          </h1>
+
+          <p>
+            I’m Qelp, a Roblox developer focused on backend architecture, gameplay systems,
+            UI integration, and clean Luau code built for performance, security, and long-term scalability.
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#work">View Portfolio</a>
+            <a class="btn btn-secondary" href="#contact">Start a Project</a>
+          </div>
+
+          <div class="metrics">
+            <div class="metric">
+              <strong>2+ yrs</strong>
+              <span>Experience</span>
+            </div>
+            <div class="metric">
+              <strong>UTC+3</strong>
+              <span>Timezone</span>
+            </div>
+            <div class="metric">
+              <strong>Luau</strong>
+              <span>Core Stack</span>
+            </div>
           </div>
         </div>
-      </article>
 
-      <article class="game-card reveal">
-        <img src="due.png" class="game-thumb" alt="Due Process thumbnail">
-        <div class="game-body">
-          <span class="game-meta">Roblox experience / roleplay systems</span>
-          <h3>Due Process</h3>
-          <p class="game-desc">A tactical FBI roleplay experience built around structured gameplay, progression, team-based roles, and expandable systems for both law enforcement and criminal-side mechanics.</p>
-          <div class="game-actions">
-            <a class="mini-btn primary" href="https://www.roblox.com/games/110894386541423/Due-Process" target="_blank">View Game</a>
+        <div class="hero-panel glass reveal">
+          <div class="terminal">
+            <div class="terminal-bar">
+              <span class="terminal-dot"></span>
+              <span class="terminal-dot"></span>
+              <span class="terminal-dot"></span>
+              <span class="terminal-title">developer.profile.luau</span>
+            </div>
+
+            <div class="terminal-code">
+              <div><span class="line-no">1</span><span class="kw">local</span> Developer = {}</div>
+              <div><span class="line-no">2</span></div>
+              <div><span class="line-no">3</span>Developer.<span class="key">Name</span> = <span class="str">"Qelp"</span></div>
+              <div><span class="line-no">4</span>Developer.<span class="key">Role</span> = <span class="str">"Roblox Systems Developer"</span></div>
+              <div><span class="line-no">5</span>Developer.<span class="key">Focus</span> = {</div>
+              <div><span class="line-no">6</span>&nbsp;&nbsp;<span class="str">"Backend Architecture"</span>,</div>
+              <div><span class="line-no">7</span>&nbsp;&nbsp;<span class="str">"Gameplay Systems"</span>,</div>
+              <div><span class="line-no">8</span>&nbsp;&nbsp;<span class="str">"UI Integration"</span></div>
+              <div><span class="line-no">9</span>}</div>
+              <div><span class="line-no">10</span></div>
+              <div><span class="line-no">11</span><span class="cm">-- clean, scalable, secure</span></div>
+              <div><span class="line-no">12</span><span class="kw">return</span> Developer</div>
+            </div>
+          </div>
+
+          <div class="floating-card">
+            <small>System-first development</small>
+            <h3>Built to scale beyond prototypes.</h3>
+            <p>Modular structure, reliable networking, safe data handling, and performance-focused scripting.</p>
           </div>
         </div>
-      </article>
-    </div>
+      </section>
+
+      <section id="about">
+        <div class="container">
+          <div class="section-head reveal">
+            <div>
+              <div class="section-kicker">01 / ABOUT</div>
+              <h2 class="section-title">Professional Roblox development with structure.</h2>
+            </div>
+            <p class="section-desc">
+              Focused on production-ready systems, not fragile scripts held together by hope and caffeine.
+            </p>
+          </div>
+
+          <div class="about-grid">
+            <article class="about-card glass hover-card reveal">
+              <div class="profile-row">
+                <div class="avatar">Q</div>
+                <div>
+                  <h3>Qelp</h3>
+                  <span>Roblox Scripter & Systems Designer</span>
+                </div>
+              </div>
+
+              <p>
+                I specialize in gameplay engineering, backend systems, ProfileStore-based data saving,
+                UI scripting, monetization flows, trading systems, inventory logic, leaderboards,
+                and scalable game frameworks. My goal is to create clean systems that are easy to expand,
+                easy to maintain, and stable under real player usage.
+              </p>
+            </article>
+
+            <div class="info-list reveal">
+              <div class="info-item glass hover-card">
+                <strong>Performance</strong>
+                <span>Optimized systems</span>
+              </div>
+              <div class="info-item glass hover-card">
+                <strong>Security</strong>
+                <span>Server-authoritative logic</span>
+              </div>
+              <div class="info-item glass hover-card">
+                <strong>Scalability</strong>
+                <span>Modular architecture</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="skills">
+        <div class="container">
+          <div class="section-head reveal">
+            <div>
+              <div class="section-kicker">02 / SKILLS</div>
+              <h2 class="section-title">Core capabilities.</h2>
+            </div>
+            <p class="section-desc">
+              The useful stuff clients actually need, instead of random buzzwords stacked like a LinkedIn ritual.
+            </p>
+          </div>
+
+          <div class="skills-grid">
+            <article class="skill-card glass hover-card reveal">
+              <div class="skill-icon">🏗️</div>
+              <h3>Modular Architecture</h3>
+              <p>Clean OOP-style codebases, service-based structure, scalable modules, and maintainable project organization.</p>
+            </article>
+
+            <article class="skill-card glass hover-card reveal">
+              <div class="skill-icon">🌐</div>
+              <h3>Client-Server Networking</h3>
+              <p>Secure remote communication, server validation, replicated effects, and reliable gameplay flow.</p>
+            </article>
+
+            <article class="skill-card glass hover-card reveal">
+              <div class="skill-icon">⚡</div>
+              <h3>Performance Optimization</h3>
+              <p>Reduced lag, cleaner loops, efficient events, better memory handling, and scalable runtime behavior.</p>
+            </article>
+
+            <article class="skill-card glass hover-card reveal">
+              <div class="skill-icon">🔒</div>
+              <h3>Data Persistence</h3>
+              <p>ProfileStore systems with session locking, safe saving, profile reconciliation, and player data protection.</p>
+            </article>
+
+            <article class="skill-card glass hover-card reveal">
+              <div class="skill-icon">🖥️</div>
+              <h3>UI Scripting</h3>
+              <p>Responsive interfaces, animated panels, shop UI, inventory UI, notifications, and polished user flows.</p>
+            </article>
+
+            <article class="skill-card glass hover-card reveal">
+              <div class="skill-icon">💠</div>
+              <h3>Monetization Systems</h3>
+              <p>Gamepasses, developer products, shops, purchases, upgrades, rewards, and economy-related systems.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="work">
+        <div class="container">
+          <div class="section-head reveal">
+            <div>
+              <div class="section-kicker">03 / WORK</div>
+              <h2 class="section-title">Selected portfolio work.</h2>
+            </div>
+            <p class="section-desc">
+              Technical showcases and Roblox projects demonstrating systems, gameplay mechanics, and integration work.
+            </p>
+          </div>
+
+          <div class="tabs reveal">
+            <button class="tab active" type="button" data-tab="showcases">System Showcases</button>
+            <button class="tab" type="button" data-tab="games">Projects</button>
+          </div>
+
+          <div class="panel active" data-panel="showcases">
+            <div class="projects-grid">
+              <article class="project-card glass hover-card reveal">
+                <iframe class="project-video" src="https://www.youtube.com/embed/DQknjgCaorI" allowfullscreen></iframe>
+                <div class="project-body">
+                  <span class="tag">BUILDING / PLACEMENT</span>
+                  <h3>Advanced Placement System</h3>
+                </div>
+              </article>
+
+              <article class="project-card glass hover-card reveal">
+                <iframe class="project-video" src="https://www.youtube.com/embed/-E85ac_U5mo" allowfullscreen></iframe>
+                <div class="project-body">
+                  <span class="tag">NPC NAVIGATION</span>
+                  <h3>PathfindingService Implementation</h3>
+                </div>
+              </article>
+
+              <article class="project-card glass hover-card reveal">
+                <iframe class="project-video" src="https://www.youtube.com/embed/t8o7YoU2Wr8" allowfullscreen></iframe>
+                <div class="project-body">
+                  <span class="tag">COMBAT / WEAPONS</span>
+                  <h3>Scalable Gun System</h3>
+                </div>
+              </article>
+
+              <article class="project-card glass hover-card reveal">
+                <iframe class="project-video" src="https://www.youtube.com/embed/9N7pt1LUl04" allowfullscreen></iframe>
+                <div class="project-body">
+                  <span class="tag">MULTIPLAYER</span>
+                  <h3>Party Teleport System</h3>
+                </div>
+              </article>
+
+              <article class="project-card glass hover-card reveal">
+                <iframe class="project-video" src="https://www.youtube.com/embed/vlUrQxvljx8" allowfullscreen></iframe>
+                <div class="project-body">
+                  <span class="tag">GAME STATE</span>
+                  <h3>Round System</h3>
+                </div>
+              </article>
+
+              <article class="project-card glass hover-card reveal">
+                <iframe class="project-video" src="https://www.youtube.com/embed/JEyb5fbO0Wk" allowfullscreen></iframe>
+                <div class="project-body">
+                  <span class="tag">ECONOMY LOGIC</span>
+                  <h3>RNG Purchase System</h3>
+                </div>
+              </article>
+            </div>
+
+            <div class="center-action reveal">
+              <button class="showcase-toggle" type="button" id="showcaseToggle">Show All</button>
+            </div>
+          </div>
+
+          <div class="panel" data-panel="games">
+            <div class="games-grid">
+              <article class="game-card glass hover-card reveal">
+                <img src="thumb.png" class="game-thumb" alt="Be A Dealer For Brainrots thumbnail">
+                <div class="game-body">
+                  <span class="tag">ECONOMY / TRADING</span>
+                  <h3>Be A Dealer For Brainrots</h3>
+                  <p>A trading and collection experience with economy systems, progression, buying, selling, and upgrade loops.</p>
+                  <a class="mini-link" href="https://www.roblox.com/games/114812891420300/Be-A-Dealer-For-Brainrots" target="_blank">View Game</a>
+                </div>
+              </article>
+
+              <article class="game-card glass hover-card reveal">
+                <img src="due.png" class="game-thumb" alt="Due Process thumbnail">
+                <div class="game-body">
+                  <span class="tag">ROLEPLAY / SYSTEMS</span>
+                  <h3>Due Process</h3>
+                  <p>A tactical FBI roleplay experience with structured gameplay, progression, team roles, and expandable mechanics.</p>
+                  <a class="mini-link" href="https://www.roblox.com/games/110894386541423/Due-Process" target="_blank">View Game</a>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="availability">
+        <div class="container">
+          <div class="section-head reveal">
+            <div>
+              <div class="section-kicker">04 / AVAILABILITY</div>
+              <h2 class="section-title">Open for commissions.</h2>
+            </div>
+            <p class="section-desc">
+              Clear scope, clean communication, and development work that does not become a tragic documentary.
+            </p>
+          </div>
+
+          <div class="availability-grid">
+            <article class="availability-card glass hover-card reveal">
+              <div class="pill"><span class="status-dot"></span>Open for new projects</div>
+              <h3>Ready for Roblox development work.</h3>
+              <p>
+                Available for scoped systems, backend scripting, UI integration, bug fixing,
+                and long-term development work. I prefer projects with clear requirements,
+                realistic deadlines, and a serious plan.
+              </p>
+              <ul class="list">
+                <li>Work Type <strong>Systems / Backend / UI</strong></li>
+                <li>Contact <strong>Discord Preferred</strong></li>
+              </ul>
+            </article>
+
+            <article class="availability-card glass hover-card reveal">
+              <div class="pill"><span class="status-dot"></span>Best fit</div>
+              <h3>Systems I can take on.</h3>
+              <p>
+                Gameplay systems, trading mechanics, inventories, ProfileStore data,
+                monetization, leaderboards, shop systems, round systems, and polished scripting integration.
+              </p>
+              <ul class="list">
+                <li>Small Systems <strong>Available</strong></li>
+                <li>Long-Term Work <strong>Open</strong></li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="pricing">
+        <div class="container">
+          <div class="section-head reveal">
+            <div>
+              <div class="section-kicker">05 / TERMS</div>
+              <h2 class="section-title">Pricing & collaboration.</h2>
+            </div>
+            <p class="section-desc">
+              Quotes are based on actual project complexity, because guessing prices blindly is how civilization collapses.
+            </p>
+          </div>
+
+          <div class="pricing-grid">
+            <article class="price-card glass hover-card reveal">
+              <h3>Pricing Policy</h3>
+              <p>
+                Pricing depends on scope, system complexity, estimated development time,
+                and how much integration the project requires.
+              </p>
+              <div class="note">
+                Revenue-share agreements are only considered for projects with proven traction or active revenue.
+              </div>
+            </article>
+
+            <article class="price-card glass hover-card reveal">
+              <h3>Payment Methods</h3>
+              <ul class="payment-list">
+                <li>💎 Robux</li>
+                <li>🪙 Crypto</li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact">
+        <div class="container">
+          <div class="contact-box glass hover-card reveal">
+            <div class="section-kicker">06 / CONTACT</div>
+            <h2>Let’s build something serious.</h2>
+            <p>
+              Have a Roblox project in mind? Reach out through Discord to discuss requirements,
+              scope, pricing, and development timeline.
+            </p>
+            <a href="https://discord.com/users/955081753461157968" target="_blank" class="btn btn-primary">
+              Contact on Discord
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="container">
+      Qelp © 2026 — Roblox systems, backend architecture, and Luau development.
+    </footer>
   </div>
-</section>
-
-<div class="divider"><span class="divider-line"></span><span class="divider-symbol">◆</span><span class="divider-line right"></span></div>
-
-
-<section id="availability">
-  <div class="section-head reveal">
-    <span class="section-tag">// 04 — availability</span>
-    <h2 class="section-title">Availability</h2>
-  </div>
-
-  <div class="availability-grid">
-    <div class="availability-card reveal">
-      <div class="availability-status"><span></span>open for commissions</div>
-      <h3>Ready for new Roblox projects</h3>
-      <p>I am available for scoped systems, backend scripting, UI integration, bug fixes, and long-term development work. I prefer clear tasks, clean structure, and projects that do not mutate into a 900-page tragedy halfway through.</p>
-      <ul class="availability-list">
-        <li>Work Type <strong>Systems / Backend / UI</strong></li>
-        <li>Response <strong>Discord Preferred</strong></li>
-      </ul>
-    </div>
-
-    <div class="availability-card reveal">
-      <div class="availability-status"><span></span>best fit</div>
-      <h3>What I can take on</h3>
-      <p>Gameplay systems, trading mechanics, inventory systems, data saving, monetization, leaderboards, shops, and polished scripting integration.</p>
-      <ul class="availability-list">
-        <li>Small Systems <strong>Available</strong></li>
-        <li>Long-Term Work <strong>Open</strong></li>
-      </ul>
-    </div>
-  </div>
-</section>
-
-<div class="divider"><span class="divider-line"></span><span class="divider-symbol">◆</span><span class="divider-line right"></span></div>
-
-<section id="pricing">
-  <div class="section-head reveal">
-    <span class="section-tag">// 05 — pricing</span>
-    <h2 class="section-title">Working together</h2>
-  </div>
-  <div class="pricing-grid">
-    <div class="price-card reveal">
-      <h3>Pricing Policy</h3>
-      <p>Price depends on project complexity — every quote is scoped to what the system actually needs.</p>
-      <div class="note">Not taking a % cut if your game isn't currently earning.</div>
-    </div>
-    <div class="price-card reveal">
-      <h3>Payment Methods</h3>
-      <ul class="payment-methods">
-        <li>💎 Robux (DevEx rate)</li>
-        <li>🪙 Crypto</li>
-      </ul>
-    </div>
-  </div>
-</section>
-
-<div class="divider"><span class="divider-line"></span><span class="divider-symbol">◆</span><span class="divider-line right"></span></div>
-
-<section id="contact" class="contact">
-  <div class="section-head reveal">
-    <span class="section-tag">// 06 — contact</span>
-    <h2 class="section-title">Let's build something</h2>
-  </div>
-  <div class="discord-box reveal">
-    <h3>Have a project in mind?</h3>
-    <p>Reach out directly via Discord — click below to open my profile.</p>
-    <a href="https://discord.com/users/1039914745240752189" target="_blank" class="btn-discord">👾 Connect on Discord</a>
-  </div>
-</section>
-
-<footer>
-  Qelp © 2026 — built with Luau in mind
-</footer>
 
 <script>
-  const reveals = document.querySelectorAll('.reveal');
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach((e, i) => {
-      if (e.isIntersecting) {
-        setTimeout(() => e.target.classList.add('visible'), i * 70);
-      }
+  const root = document.documentElement;
+
+  window.addEventListener("mousemove", (event) => {
+    root.style.setProperty("--mx", `${event.clientX}px`);
+    root.style.setProperty("--my", `${event.clientY}px`);
+  });
+
+  const reveals = document.querySelectorAll(".reveal");
+
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry, index) => {
+      if (!entry.isIntersecting) return;
+      setTimeout(() => {
+        entry.target.classList.add("visible");
+      }, index * 65);
+      revealObserver.unobserve(entry.target);
     });
   }, { threshold: 0.12 });
-  reveals.forEach(el => observer.observe(el));
 
-  document.querySelectorAll('a[href^="#"]').forEach(a => {
-    a.addEventListener('click', e => {
-      e.preventDefault();
-      const t = document.querySelector(a.getAttribute('href'));
-      if (t) t.scrollIntoView({ behavior: 'smooth' });
+  reveals.forEach((element) => revealObserver.observe(element));
+
+  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+    anchor.addEventListener("click", (event) => {
+      const target = document.querySelector(anchor.getAttribute("href"));
+      if (!target) return;
+      event.preventDefault();
+      target.scrollIntoView({ behavior: "smooth", block: "start" });
     });
   });
 
-  const workTabs = document.querySelectorAll('.work-tab');
-  const workPanels = document.querySelectorAll('.work-panel');
+  const tabs = document.querySelectorAll(".tab");
+  const panels = document.querySelectorAll(".panel");
 
-  workTabs.forEach(tab => {
-    tab.addEventListener('click', () => {
-      const target = tab.dataset.workTab;
+  tabs.forEach((tab) => {
+    tab.addEventListener("click", () => {
+      const target = tab.dataset.tab;
 
-      workTabs.forEach(t => t.classList.remove('active'));
-      workPanels.forEach(panel => panel.classList.remove('active'));
+      tabs.forEach((item) => item.classList.remove("active"));
+      panels.forEach((panel) => panel.classList.remove("active"));
 
-      tab.classList.add('active');
-      const panel = document.querySelector(`[data-work-panel="${target}"]`);
-      if (panel) panel.classList.add('active');
+      tab.classList.add("active");
+      const panel = document.querySelector(`[data-panel="${target}"]`);
+      if (panel) panel.classList.add("active");
     });
   });
 
-
-  const showcaseCards = document.querySelectorAll('[data-work-panel="showcases"] .project-card');
-  const showcaseToggle = document.getElementById('showcaseToggle');
+  const showcaseCards = document.querySelectorAll('[data-panel="showcases"] .project-card');
+  const showcaseToggle = document.getElementById("showcaseToggle");
   let showcasesExpanded = false;
 
   function updateShowcases() {
     showcaseCards.forEach((card, index) => {
       if (!showcasesExpanded && index >= 3) {
-        card.classList.add('hidden-showcase');
+        card.classList.add("hidden-showcase");
       } else {
-        card.classList.remove('hidden-showcase');
+        card.classList.remove("hidden-showcase");
       }
     });
 
     if (showcaseToggle) {
-      showcaseToggle.textContent = showcasesExpanded ? 'Show Less' : 'Show All';
+      showcaseToggle.textContent = showcasesExpanded ? "Show Less" : "Show All";
     }
   }
 
   if (showcaseToggle) {
-    showcaseToggle.addEventListener('click', () => {
+    showcaseToggle.addEventListener("click", () => {
       showcasesExpanded = !showcasesExpanded;
       updateShowcases();
     });
   }
 
   updateShowcases();
-
-  const skillCards = document.querySelectorAll('.skill-card');
-  const skillObs = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        const fill = e.target.querySelector('.skill-fill');
-        if (fill) { const w = fill.style.width; fill.style.width = '0'; setTimeout(() => fill.style.width = w, 100); }
-      }
-    });
-  }, { threshold: 0.5 });
-  skillCards.forEach(c => skillObs.observe(c));
 </script>
 </body>
 </html>
